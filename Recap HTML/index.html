@@ -3,27 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>HTML Practice Page</title>
   </head>
   <body>
+    <!-- Heading and Description -->
     <h2>Remove the Iframe Border</h2>
     <p>To remove the default border of the iframe, use CSS:</p>
 
-    <!-- Iframe -->
+    <!-- Iframe Example -->
     <iframe
       width="560"
       height="315"
       src="https://www.youtube.com/embed/tgbNymZ7vqY"
       title="YouTube video player"
       frameborder="0"
-    >
-    </iframe>
-    <br />
-    <br />
+    ></iframe>
+
+    <br /><br />
+
+    <!-- JavaScript DOM Manipulation -->
     <button onclick="myFunction()">Click</button>
     <p id="demo">This is a demonstration.</p>
-
     <p>Save the document by pressing Ctrl + S</p>
+
+    <!-- HTML Entities -->
+    <h3>HTML Entities</h3>
     <ul>
       <li>&lt less than</li>
       <li>&gt greater than</li>
@@ -42,13 +46,106 @@
       <li>&euro euro symbol</li>
     </ul>
 
+    <!-- Radio Button Group -->
+    <h3>Choose your favorite Web language:</h3>
+    <form>
+      <input type="radio" id="html" name="fav_language" value="HTML" />
+      <label for="html">HTML</label><br />
+      <input type="radio" id="css" name="fav_language" value="CSS" />
+      <label for="css">CSS</label><br />
+      <input
+        type="radio"
+        id="javascript"
+        name="fav_language"
+        value="JavaScript"
+      />
+      <label for="javascript">JavaScript</label>
+    </form>
+
+    <br /><br />
+
+    <!-- User Information Form -->
+    <form autocomplete="on">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required /><br /><br />
+
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" required /><br /><br />
+
+      <label for="cars">Choose a car:</label>
+      <select id="cars" name="cars">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="fiat" selected>Fiat</option>
+        <option value="audi">Audi</option>
+      </select>
+      <br /><br />
+
+      <fieldset>
+        <legend>Personalia:</legend>
+        <label for="fname">First name:</label><br />
+        <input type="text" id="fname" name="fname" value="John" /><br />
+        <label for="lname">Last name:</label><br />
+        <input type="text" id="lname" name="lname" value="Doe" /><br />
+      </fieldset>
+
+      <br />
+
+      <label for="address">Address:</label><br />
+      <textarea id="address" name="address" rows="4" cols="30"></textarea
+      ><br /><br />
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <br /><br />
+
+    <!-- Range Slider Output -->
+    <form oninput="x.value=parseInt(a.value)">
+      0
+      <input type="range" id="a" name="a" value="30" />
+      100 =
+      <output name="x" for="a"></output>
+      <br /><br />
+      <input type="submit" />
+      <input type="color" />
+      <input type="datetime-local" />
+    </form>
+
+    <br /><br />
+
+    <!-- File Upload and Inputs -->
+    <form onsubmit="fileAttached(event)">
+      <input type="file" name="file" id="fileInput" />
+      <input type="search" placeholder="Search..." />
+      <input type="tel" placeholder="Phone number" />
+      <input type="submit" />
+    </form>
+
+    <!-- JavaScript Section -->
     <script>
       function myFunction() {
-        document.getElementById("demo").innerHTML = "Hello Javascript";
-        document.getElementById("demo").style.backgroundColor = "orange";
-        document.getElementById("demo").style.fontSize = "60px";
+        const demo = document.getElementById("demo");
+        demo.innerHTML = "Hello Javascript";
+        demo.style.backgroundColor = "orange";
+        demo.style.fontSize = "60px";
+      }
+
+      function fileAttached(event) {
+        event.preventDefault();
+        const file = document.getElementById("fileInput").files[0];
+        if (file) {
+          console.log("Selected file:", file.name);
+        } else {
+          console.log("No file selected.");
+        }
       }
     </script>
+
+    <!-- Fallback if JS is Disabled -->
     <noscript>Sorry, your browser does not support JavaScript!</noscript>
   </body>
 </html>
