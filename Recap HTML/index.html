@@ -18,5 +18,18 @@
       frameborder="0"
     >
     </iframe>
+    <br />
+    <br />
+    <button onclick="myFunction()">Click</button>
+    <p id="demo">This is a demonstration.</p>
+
+    <script>
+      function myFunction() {
+        document.getElementById("demo").innerHTML = "Hello Javascript";
+        document.getElementById("demo").style.backgroundColor = "orange";
+        document.getElementById("demo").style.fontSize = "60px";
+      }
+    </script>
+    <noscript>Sorry, your browser does not support JavaScript!</noscript>
   </body>
 </html>
