@@ -155,6 +155,16 @@
       width="336"
       height="69"
     />
+    <br /><br />
+    <div id="demo6">Hello</div>
+
+    <br /><br />
+    <button onclick="clickCounter()" type="button">Click me!</button>
+    <p id="demo7"></p>
+
+    <br /><br />
+    <button onclick="clickCounterSession()" type="button">Click me!</button>
+    <p id="demo8"></p>
 
     <!-- JavaScript Section -->
     <script>
@@ -222,6 +232,52 @@
       function mouseMoving() {
         console.log("Mouse is moving");
       }
+
+      const y = document.getElementById("demo6");
+      console.log(y);
+
+      localStorage.setItem("lastname", "shahriar");
+      localStorage.setItem("firstname", "atique");
+      localStorage.setItem("bgcolor", "yellow");
+
+      y.innerHTML = localStorage.getItem("lastname");
+      y.style.backgroundColor = localStorage.getItem("bgcolor");
+
+      function clickCounter() {
+        const x = document.getElementById("demo7");
+        if (typeof Storage !== "undefined") {
+          if (localStorage.clickcount) {
+            localStorage.clickcount = Number(localStorage.clickcount) + 1;
+          } else {
+            localStorage.clickcount = 1;
+          }
+          x.innerHTML =
+            "You have clicked the button " +
+            localStorage.clickcount +
+            " time(s)!";
+        } else {
+          x.innerHTML = "Sorry, no Web storage support!";
+        }
+      }
+
+      function clickCounterSession() {
+        const x = document.getElementById("demo8");
+        if (typeof Storage !== "undefined") {
+          if (sessionStorage.clickcount) {
+            sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
+          } else {
+            sessionStorage.clickcount = 1;
+          }
+          x.innerHTML =
+            "You have clicked the button " +
+            sessionStorage.clickcount +
+            " time(s) in this session!";
+        } else {
+          x.innerHTML = "Sorry, no Web storage support!";
+        }
+      }
+
+      console.log(Worker);
     </script>
 
     <!-- Fallback if JS is Disabled -->
