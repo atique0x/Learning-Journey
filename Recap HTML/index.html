@@ -4,13 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HTML Practice Page</title>
+    <style>
+      iframe {
+        border: none; /* Removes default border */
+      }
+    </style>
   </head>
   <body>
     <!-- Heading and Description -->
     <h2>Remove the Iframe Border</h2>
     <p>To remove the default border of the iframe, use CSS:</p>
-
-    <!-- Iframe Example -->
     <iframe
       width="560"
       height="315"
@@ -19,32 +22,37 @@
       frameborder="0"
     ></iframe>
 
-    <br /><br />
+    <hr />
 
     <!-- JavaScript DOM Manipulation -->
+    <h3>JavaScript DOM Manipulation</h3>
     <button onclick="myFunction()">Click</button>
     <p id="demo">This is a demonstration.</p>
-    <p>Save the document by pressing Ctrl + S</p>
+    <p>Save the document by pressing <kbd>Ctrl + S</kbd></p>
+
+    <hr />
 
     <!-- HTML Entities -->
     <h3>HTML Entities</h3>
     <ul>
-      <li>&lt less than</li>
-      <li>&gt greater than</li>
-      <li>&amp ampersand</li>
-      <li>&quot double quote</li>
-      <li>&apos single quote</li>
-      <li>&nbsp non-breaking space</li>
-      <li>&cent cent sign</li>
-      <li>&pound pound sign</li>
-      <li>&yen yen sign</li>
-      <li>&copy copyright</li>
-      <li>&reg registered trademark</li>
-      <li>&trade trademark</li>
-      <li>&rarr right arrow</li>
-      <li>&larr left arrow</li>
-      <li>&euro euro symbol</li>
+      <li>&lt; less than</li>
+      <li>&gt; greater than</li>
+      <li>&amp; ampersand</li>
+      <li>&quot; double quote</li>
+      <li>&apos; single quote</li>
+      <li>&nbsp; non-breaking space</li>
+      <li>&cent; cent sign</li>
+      <li>&pound; pound sign</li>
+      <li>&yen; yen sign</li>
+      <li>&copy; copyright</li>
+      <li>&reg; registered trademark</li>
+      <li>&trade; trademark</li>
+      <li>&rarr; right arrow</li>
+      <li>&larr; left arrow</li>
+      <li>&euro; euro symbol</li>
     </ul>
+
+    <hr />
 
     <!-- Radio Button Group -->
     <h3>Choose your favorite Web language:</h3>
@@ -62,9 +70,10 @@
       <label for="javascript">JavaScript</label>
     </form>
 
-    <br /><br />
+    <hr />
 
     <!-- User Information Form -->
+    <h3>User Information Form</h3>
     <form autocomplete="on">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required /><br /><br />
@@ -80,9 +89,8 @@
         <option value="volvo">Volvo</option>
         <option value="saab">Saab</option>
         <option value="fiat" selected>Fiat</option>
-        <option value="audi">Audi</option>
-      </select>
-      <br /><br />
+        <option value="audi">Audi</option></select
+      ><br /><br />
 
       <fieldset>
         <legend>Personalia:</legend>
@@ -101,23 +109,25 @@
       <button type="submit">Submit</button>
     </form>
 
-    <br /><br />
+    <hr />
 
-    <!-- Range Slider Output -->
+    <!-- Range Slider, Color, DateTime -->
+    <h3>Interactive Inputs</h3>
     <form oninput="x.value=parseInt(a.value)">
       0
       <input type="range" id="a" name="a" value="30" />
       100 =
-      <output name="x" for="a"></output>
-      <br /><br />
+      <output name="x" for="a"></output><br /><br />
+
       <input type="submit" />
       <input type="color" />
       <input type="datetime-local" />
     </form>
 
-    <br /><br />
+    <hr />
 
-    <!-- File Upload and Inputs -->
+    <!-- File Upload and Search -->
+    <h3>File and Search</h3>
     <form onsubmit="fileAttached(event)">
       <input type="file" name="file" id="fileInput" />
       <input type="search" placeholder="Search..." />
@@ -125,6 +135,10 @@
       <input type="submit" />
     </form>
 
+    <hr />
+
+    <!-- Media -->
+    <h3>Media Elements</h3>
     <video
       src="example.mp4"
       height="120"
@@ -132,13 +146,20 @@
       style="border: 1px solid red"
       controls
     ></video>
-
+    <br /><br />
     <audio src="example.mp4" controls autoplay muted></audio>
 
+    <hr />
+
+    <!-- Geolocation -->
+    <h3>Geolocation</h3>
     <p id="demo5"></p>
     <button onclick="getLocation()">Get Location</button>
 
-    <br />
+    <hr />
+
+    <!-- Drag and Drop -->
+    <h3>Drag and Drop</h3>
     <div
       id="div1"
       ondrop="dropHandler(event)"
@@ -155,22 +176,27 @@
       width="336"
       height="69"
     />
-    <br /><br />
-    <div id="demo6">Hello</div>
 
+    <hr />
+
+    <!-- Local Storage and Session Storage -->
+    <h3>Web Storage</h3>
+    <div id="demo6">Hello</div>
     <br /><br />
+
     <button onclick="clickCounter()" type="button">Click me!</button>
     <p id="demo7"></p>
 
-    <br /><br />
     <button onclick="clickCounterSession()" type="button">Click me!</button>
     <p id="demo8"></p>
+
+    <hr />
 
     <!-- JavaScript Section -->
     <script>
       function myFunction() {
         const demo = document.getElementById("demo");
-        demo.innerHTML = "Hello Javascript";
+        demo.innerHTML = "Hello JavaScript";
         demo.style.backgroundColor = "orange";
         demo.style.fontSize = "60px";
       }
@@ -189,8 +215,6 @@
 
       function getLocation() {
         navigator.geolocation.getCurrentPosition(success, error);
-        // if(navigator.geolocation){
-        // }
       }
 
       function success(position) {
@@ -200,12 +224,8 @@
           "<br>Longitude: " +
           position.coords.longitude;
 
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
-
-        const mapUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+        const mapUrl = `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
         window.open(mapUrl);
-        console.log(position);
       }
 
       function error() {
@@ -213,10 +233,7 @@
       }
 
       function dragstartHandler(ev) {
-        console.log(ev);
         ev.dataTransfer.setData("text", ev.target.id);
-        console.log(ev);
-        // ev.dataTransfer.setData("text", ev.target.id);
       }
 
       function dragoverHandler(ev) {
@@ -234,8 +251,6 @@
       }
 
       const y = document.getElementById("demo6");
-      console.log(y);
-
       localStorage.setItem("lastname", "shahriar");
       localStorage.setItem("firstname", "atique");
       localStorage.setItem("bgcolor", "yellow");
@@ -246,15 +261,8 @@
       function clickCounter() {
         const x = document.getElementById("demo7");
         if (typeof Storage !== "undefined") {
-          if (localStorage.clickcount) {
-            localStorage.clickcount = Number(localStorage.clickcount) + 1;
-          } else {
-            localStorage.clickcount = 1;
-          }
-          x.innerHTML =
-            "You have clicked the button " +
-            localStorage.clickcount +
-            " time(s)!";
+          localStorage.clickcount = (Number(localStorage.clickcount) || 0) + 1;
+          x.innerHTML = `You have clicked the button ${localStorage.clickcount} time(s)!`;
         } else {
           x.innerHTML = "Sorry, no Web storage support!";
         }
@@ -263,24 +271,16 @@
       function clickCounterSession() {
         const x = document.getElementById("demo8");
         if (typeof Storage !== "undefined") {
-          if (sessionStorage.clickcount) {
-            sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
-          } else {
-            sessionStorage.clickcount = 1;
-          }
-          x.innerHTML =
-            "You have clicked the button " +
-            sessionStorage.clickcount +
-            " time(s) in this session!";
+          sessionStorage.clickcount =
+            (Number(sessionStorage.clickcount) || 0) + 1;
+          x.innerHTML = `You have clicked the button ${sessionStorage.clickcount} time(s) in this session!`;
         } else {
           x.innerHTML = "Sorry, no Web storage support!";
         }
       }
-
-      console.log(Worker);
     </script>
 
-    <!-- Fallback if JS is Disabled -->
+    <!-- Fallback for no JavaScript -->
     <noscript>Sorry, your browser does not support JavaScript!</noscript>
   </body>
 </html>
