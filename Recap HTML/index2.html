@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML</title>
+  </head>
+  <body>
+    <p id="demo1">Show web workers result</p>
+
+    <input
+      type="number"
+      placeholder="Input number to countdown"
+      id="counterInput"
+    />
+    <button onclick="webWorkers(event)">Web Workers</button>
+
+    <script>
+      function webWorkers(event) {
+        event.preventDefault();
+
+        // Get input number and convert to Number
+        const inputValue = Number(
+          document.getElementById("counterInput").value
+        );
+
+        // Create a new web worker
+        const worker = new Worker("worker.js");
+
+        // Send the input value to the worker
+        worker.postMessage(inputValue);
+
+        // Receive message back from worker
+        worker.onmessage = function (event) {
+          document.getElementById("demo1").innerText = event.data;
+        };
+
+        // Optional UI feedback
+        document.getElementById("demo1").style.backgroundColor = "yellow";
+
+        console.log("Clicked");
+        console.log("This is web workers");
+      }
+    </script>
+  </body>
+</html>
