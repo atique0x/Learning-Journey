@@ -6,41 +6,195 @@
     <title>HTML</title>
   </head>
   <body>
+    <!-- Web Worker Section -->
     <p id="demo1">Show web workers result</p>
-
     <input
       type="number"
-      placeholder="Input number to countdown"
       id="counterInput"
+      placeholder="Input number to countdown"
     />
     <button onclick="webWorkers(event)">Web Workers</button>
+
+    <!-- Contenteditable Example -->
+    <div contenteditable="true">Editable div</div>
+
+    <!-- Draggable and Scrollable Div -->
+    <div
+      draggable="true"
+      onscroll="alert('Scrolling')"
+      style="height: 100px; overflow: auto; border: 1px solid red"
+    >
+      Draggable div<br /><br /><br /><br /><br /><br />
+      Add more content<br /><br /><br /><br /><br /><br />
+      Keep scrolling...
+    </div>
+
+    <!-- Mobile Keyboard Hint -->
+    <input type="text" enterkeyhint="go" />
+
+    <!-- Basic Form Interaction -->
+    <div>
+      <label for="name">Enter name:</label>
+      <input type="text" name="name" id="name" onblur="myFun()" />
+    </div>
+
+    <!-- Select Dropdown with onchange -->
+    <div>
+      <p>Select a new car from the list.</p>
+      <select id="mySelect" onchange="myFunction()">
+        <option value="Audi">Audi</option>
+        <option value="BMW">BMW</option>
+        <option value="Mercedes">Mercedes</option>
+        <option value="Volvo">Volvo</option>
+      </select>
+      <p id="demo2">Car</p>
+    </div>
+
+    <!-- Enable/Disable Button Example -->
+    <div>
+      <button onclick="btnFun()">Button Enable</button>
+    </div>
+    <div>
+      <button popovertarget="myheader" disabled id="enableBtn">
+        Click Popover
+      </button>
+      <div popover id="myheader" style="width: 60%">
+        <h1>Popover Header</h1>
+        <p>Lorem ipsum dolor sit amet consectetur...</p>
+        <button>Close</button>
+      </div>
+    </div>
+
+    <!-- Mouse Events -->
+    <div>
+      <div onmouseover="this.style.color='blue'">Hover me</div>
+      <div onmouseout="this.style.color='red'">Hover me</div>
+      <p ondblclick="this.style.fontSize='24px'">Double-click me</p>
+      <div onmousemove="console.log('Moving')">Move mouse here</div>
+    </div>
+
+    <!-- Form with Event Examples -->
+    <form onsubmit="handleSubmit(event)" onreset="handleReset()">
+      <label>Name (onfocus / onblur):</label><br />
+      <input
+        type="text"
+        onfocus="highlight(this)"
+        onblur="removeHighlight(this)"
+        required
+      /><br />
+
+      <label>Live Typing (oninput):</label><br />
+      <input type="text" oninput="showLiveText(this)" />
+      <p id="liveOutput"></p>
+
+      <label>Select Language (onchange):</label><br />
+      <select onchange="handleChange(this)">
+        <option value="">Select...</option>
+        <option value="HTML">HTML</option>
+        <option value="CSS">CSS</option>
+        <option value="JavaScript">JavaScript</option></select
+      ><br />
+
+      <label>Email (oninvalid):</label><br />
+      <input
+        type="email"
+        required
+        oninvalid="alert('Please enter a valid email')"
+      /><br />
+
+      <label>Textarea (onselect):</label><br />
+      <textarea onselect="textSelected()">Try selecting this text.</textarea
+      ><br />
+
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </form>
+
+    <!-- Copy Event and Accesskey -->
+    <p oncopy="handleCopy()">Copied Text</p>
+    <button accesskey="s" onclick="handleKeySubmit()">
+      Click s for submit
+    </button>
+
+    <details open>
+      <summary>Click to Open</summary>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam,
+      nesciunt?
+    </details>
 
     <script>
       function webWorkers(event) {
         event.preventDefault();
-
-        // Get input number and convert to Number
         const inputValue = Number(
           document.getElementById("counterInput").value
         );
-
-        // Create a new web worker
         const worker = new Worker("worker.js");
-
-        // Send the input value to the worker
         worker.postMessage(inputValue);
-
-        // Receive message back from worker
         worker.onmessage = function (event) {
           document.getElementById("demo1").innerText = event.data;
         };
-
-        // Optional UI feedback
         document.getElementById("demo1").style.backgroundColor = "yellow";
-
-        console.log("Clicked");
-        console.log("This is web workers");
       }
+
+      function btnFun() {
+        const btn = document.getElementById("enableBtn");
+        if (btn.hasAttribute("disabled")) {
+          btn.removeAttribute("disabled");
+        } else {
+          btn.setAttribute("disabled", "");
+        }
+      }
+
+      function myFun() {
+        const x = document.getElementById("name");
+        x.value = x.value.toUpperCase();
+      }
+
+      function myFunction() {
+        console.log(document.getElementById("mySelect").value);
+      }
+
+      function highlight(el) {
+        el.style.backgroundColor = "yellow";
+      }
+
+      function removeHighlight(el) {
+        el.style.backgroundColor = "white";
+        el.value = el.value.toUpperCase();
+      }
+
+      function showLiveText(el) {
+        document.getElementById("liveOutput").innerText = el.value;
+      }
+
+      function handleChange(el) {
+        console.log(el.value);
+      }
+
+      function textSelected() {
+        console.log("Text selected");
+      }
+
+      function handleKeySubmit() {
+        console.log("Submitted with access key");
+      }
+
+      function handleCopy() {
+        alert("Text copied");
+      }
+
+      function handleSubmit(event) {
+        event.preventDefault();
+        alert("Form submitted!");
+      }
+
+      function handleReset() {
+        console.log("Form reset");
+      }
+
+      window.onresize = () => {
+        console.log("Window resized", window.innerWidth, window.innerHeight);
+      };
     </script>
   </body>
 </html>
