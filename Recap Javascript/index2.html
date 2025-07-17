@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>JS Quiz - July 17</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                padding: 20px;
+                max-width: 800px;
+                margin: auto;
+            }
+            h2 {
+                color: #333;
+            }
+            .question {
+                margin-bottom: 20px;
+            }
+            button {
+                margin-top: 20px;
+                padding: 10px 20px;
+            }
+            .result {
+                margin-top: 30px;
+                font-size: 1.2em;
+                font-weight: bold;
+                color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>🧠 JavaScript Quiz – July 17 Topics</h2>
+
+        <form id="quizForm">
+            <!-- Questions will be inserted here -->
+        </form>
+
+        <button onclick="submitQuiz()">Submit Quiz</button>
+
+        <div id="result" class="result"></div>
+
+        <script>
+            const questions = [
+                {
+                    question: "1. What will be the output of typeof null?",
+                    options: ['"null"', '"object"', '"undefined"', '"NaN"'],
+                    answer: 1,
+                },
+                {
+                    question: "2. Which keyword allows reassignment?",
+                    options: ["const", "var", "let", "both var and let"],
+                    answer: 3,
+                },
+                {
+                    question:
+                        "3. What is the default value of an uninitialized variable?",
+                    options: ["0", "null", "undefined", "NaN"],
+                    answer: 2,
+                },
+                {
+                    question: "4. Which operator is used for strict equality?",
+                    options: ["==", "===", "!=", "!=="],
+                    answer: 1,
+                },
+                {
+                    question: "5. What will be the result of null + 5?",
+                    options: ['"null5"', "null5", "5", "NaN"],
+                    answer: 2,
+                },
+                {
+                    question: "6. What is the type of NaN?",
+                    options: ['"NaN"', '"number"', '"undefined"', '"object"'],
+                    answer: 1,
+                },
+                {
+                    question: "7. What will typeof typeof 1 return?",
+                    options: [
+                        '"number"',
+                        '"string"',
+                        '"object"',
+                        '"undefined"',
+                    ],
+                    answer: 1,
+                },
+                {
+                    question: "8. Which expression returns true?",
+                    options: [
+                        "NaN === NaN",
+                        "null === undefined",
+                        "null == undefined",
+                        'typeof null === "null"',
+                    ],
+                    answer: 2,
+                },
+                {
+                    question: '9. What is the result of null + "hello"?',
+                    options: ['"nullhello"', "NaN", "0", '"0hello"'],
+                    answer: 0,
+                },
+                {
+                    question: "10. Which is NOT a primitive data type?",
+                    options: ["undefined", "object", "string", "boolean"],
+                    answer: 1,
+                },
+                {
+                    question: "11. Which value is falsy?",
+                    options: ['"false"', "[]", "null", "1"],
+                    answer: 2,
+                },
+                {
+                    question:
+                        "12. What happens if const is declared without value?",
+                    options: [
+                        "It becomes undefined",
+                        "It's allowed",
+                        "Throws syntax error",
+                        "It's null",
+                    ],
+                    answer: 2,
+                },
+                {
+                    question: "13. Which is true about let and const?",
+                    options: [
+                        "Both are function-scoped",
+                        "Both hoisted and initialized to undefined",
+                        "const must be initialized",
+                        "let is read-only",
+                    ],
+                    answer: 2,
+                },
+                {
+                    question: "14. Output of let a; console.log(a + 2);",
+                    options: ["2", "undefined2", "NaN", "error"],
+                    answer: 2,
+                },
+                {
+                    question: "15. Which returns false?",
+                    options: [
+                        'typeof NaN === "number"',
+                        'typeof undefined === "undefined"',
+                        "null == undefined",
+                        "null === undefined",
+                    ],
+                    answer: 3,
+                },
+            ];
+
+            const quizForm = document.getElementById("quizForm");
+
+            questions.forEach((q, i) => {
+                const div = document.createElement("div");
+                div.className = "question";
+                div.innerHTML =
+                    `<strong>${q.question}</strong><br/>` +
+                    q.options
+                        .map(
+                            (opt, j) =>
+                                `<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label><br/>`
+                        )
+                        .join("");
+                quizForm.appendChild(div);
+            });
+
+            function submitQuiz() {
+                let score = 0;
+                questions.forEach((q, i) => {
+                    const selected = document.querySelector(
+                        `input[name="q${i}"]:checked`
+                    );
+                    if (selected && parseInt(selected.value) === q.answer) {
+                        score++;
+                    }
+                });
+                document.getElementById(
+                    "result"
+                ).textContent = `✅ You scored ${score} out of ${questions.length}`;
+            }
+        </script>
+    </body>
+</html>
