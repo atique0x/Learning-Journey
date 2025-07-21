@@ -99,3 +99,29 @@ console.log(fillArr); // ["X", "X", "X", "X"]
 const moved = [10, 20, 30, 40];
 moved.copyWithin(0, 2);
 console.log(moved); // [30, 40, 30, 40]
+
+const nums = [1, 5, 6, 8, 10, 25, 89, 1, 26, 5, 4, 39];
+
+const numsObj = {
+    x: 3,
+    y: 4,
+    z: 6,
+    m: 5,
+    n: 2,
+    o: 1,
+};
+
+console.log(nums);
+console.log(numsObj);
+
+const [r, s, ...restA] = nums;
+const { x, y, o, ...p } = numsObj;
+console.log(x, o, p);
+
+console.log(...nums);
+
+function spread(...num) {
+    console.log(a);
+}
+
+spread(3, 4, 6, 2, 6);
