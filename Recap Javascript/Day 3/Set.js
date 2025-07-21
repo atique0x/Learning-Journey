@@ -34,3 +34,6 @@ console.log("After deleting 'b':", letters);
 
 // ✅ forEach(): Loop through set
 letters.forEach((value) => console.log("forEach:", value));
+
+const num = [1, 2, 6, 5, 8, 3, 2, 7, 8, 9, 5, 2, 6, 4, 5, 8, 2, 0];
+console.log(new Set(num.sort()));
