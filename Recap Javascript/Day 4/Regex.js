@@ -29,6 +29,6 @@ const number = "01311 33 0653";
 console.log("BD Number Pattern Test:", /\d{5}\s\d{2}\s\d{4}/.test(number)); // true
 
 // === 7. Date Format dd-mm-yyyy or dd/mm/yyyy
-const date = "22/07/2025";
+export const date = "22/07/2025";
 const datePattern = /^\d{2}[-/]\d{2}[-/]\d{2,4}$/;
 console.log("Date Pattern Test:", datePattern.test(date)); // true
