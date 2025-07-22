@@ -106,3 +106,25 @@ console.log(alnumRegex.test("abc123")); // true
 const words = "I love JavaScript!".match(/\b\w+\b/g);
 console.log(words); // ["I", "love", "JavaScript"]
 ```
+
+# JavaScript Error Types
+
+This document provides an overview of the most common JavaScript error types and when they typically occur.
+
+| Error Type       | Description                                            |
+| ---------------- | ------------------------------------------------------ |
+| `SyntaxError`    | Occurs when code has invalid syntax.                   |
+| `ReferenceError` | Variable that doesn't exist is accessed.               |
+| `TypeError`      | Wrong type used (e.g., call a number like a function). |
+| `RangeError`     | A value is out of the allowable range.                 |
+| `EvalError`      | Issues related to the `eval()` function (rare).        |
+| `URIError`       | Problems with `encodeURI()` or `decodeURI()`.          |
+| `AggregateError` | Represents multiple errors (e.g., in `Promise.any()`). |
+
+# JavaScript Scope Overview
+
+| Scope Type   | Declared With         | Accessible Where              | Notes                                                                                                   |
+| ------------ | --------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Global**   | `var`, `let`, `const` | Anywhere in the code          | Declared outside functions or blocks; pollutes global namespace if overused                             |
+| **Function** | `var`, `let`, `const` | Inside the entire function    | Variables exist throughout the function scope; `var` is function-scoped but ignores block scope         |
+| **Block**    | `let`, `const`        | Inside the nearest `{}` block | Applies to loops, conditionals, etc.; `var` does NOT have block scope, it is hoisted to function/global |
