@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            #container {
+                width: 400px;
+                height: 400px;
+                position: relative;
+                background: yellow;
+            }
+            #animate {
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                background-color: red;
+            }
+            #animate2 {
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                right: 0;
+                background-color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <p id="demo1" class="para">Paragraph1</p>
+        <p id="demo2" class="para">Paragraph2</p>
+        <p id="demo3" class="para">Paragraph3</p>
+        <a href="">Link</a>
+        <button>Click Me</button>
+
+        <button id="myBtn">Click me</button>
+
+        <form action="" id="form1">
+            <input type="text" value="First" />
+            <input type="text" value="First" />
+            <input type="text" value="First" />
+            <input type="submit" value="" />
+        </form>
+        <br />
+
+        <p><button onclick="myMove()">Click Me</button></p>
+
+        <div id="container">
+            <div id="animate"></div>
+            <div id="animate2"></div>
+        </div>
+        <div>
+            <button
+                id="hoverBtn"
+                onmouseover="hoverMe()"
+                onmouseout="hoverOut()"
+            >
+                Mouser Hover
+            </button>
+        </div>
+        <input
+            type="text"
+            placeholder="Type something"
+            onkeypress="console.log(event.key)"
+        />
+        <br />
+        <p id="timeOutId">Timeout</p>
+        <p id="intervalId">Interval</p>
+        <br />
+        <button id="setTimeOutBtn">Set Timeout</button>
+        <br />
+        <button id="clearTimeOutBtn">Clear Timeout</button>
+        <br />
+        <button id="setIntervalBtn">Set Interval</button>
+        <br />
+        <button id="clearIntervalBtn">Clear Interval</button>
+        <script src="script.js"></script>
+    </body>
+</html>
