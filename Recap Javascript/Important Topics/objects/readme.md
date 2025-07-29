@@ -1,29 +1,19 @@
-## 2. finally Block
-
--   Runs after `try` and `catch` blocks, regardless of whether an error was thrown or caught.
+# JavaScript Object Properties & Methods
 
 ---
 
-## Common JavaScript Error Types
+## Keys and Values
 
-| Error Type         | Description                                               |
-| ------------------ | --------------------------------------------------------- |
-| **SyntaxError**    | Occurs when code has invalid syntax.                      |
-| **ReferenceError** | Variable that doesn't exist is accessed.                  |
-| **TypeError**      | Wrong type used (e.g., calling a number like a function). |
-| **RangeError**     | A value is out of the allowable range.                    |
-| **EvalError**      | Issues related to the `eval()` function (rare).           |
-| **URIError**       | Problems with `encodeURI()` or `decodeURI()`.             |
-| **AggregateError** | Represents multiple errors (e.g., in `Promise.any()`).    |
+-   **Keys** are called **properties**.
+-   **Values** can be any data type: string, number, boolean, array, object, or function.
 
 ---
 
-## 3. throw Statement
+## Useful Object Methods
 
--   The `throw` statement allows you to manually raise (throw) an error.
--   It interrupts the normal flow of the program.
--   You can throw built-in Error objects or create your own custom errors.
-
-```js
-throw new Error("Something went wrong!");
-```
+| Method                          | Description                                          |
+| ------------------------------- | ---------------------------------------------------- |
+| `Object.keys(obj)`              | Returns an array of the object's **keys**            |
+| `Object.values(obj)`            | Returns an array of the object's **values**          |
+| `Object.entries(obj)`           | Returns an array of **[key, value]** pairs           |
+| `Object.assign(target, source)` | Copies values from source object(s) to target object |
