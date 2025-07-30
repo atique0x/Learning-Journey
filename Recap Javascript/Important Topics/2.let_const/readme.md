@@ -1,4 +1,28 @@
-# JavaScript Hoisting Explained
+## The Three Ways to Declare Variables
+
+| Keyword | Reassignable? | Scope    | Hoisted?                       | Use Case                           |
+| ------- | ------------- | -------- | ------------------------------ | ---------------------------------- |
+| `var`   | ✅ Yes        | Function | ✅ Yes (but undefined)         | Legacy code, or inside functions   |
+| `let`   | ✅ Yes        | Block    | ✅ Yes (in temporal dead zone) | Most common for mutable values     |
+| `const` | ❌ No         | Block    | ✅ Yes (in temporal dead zone) | For constants and fixed references |
+
+<br>
+
+## Why You Should Not Use `var` in JavaScript
+
+-   **Not Block-Scoped**:  
+    `var` ignores block scope (`if`, `for`, etc.), which can lead to unexpected variable access and bugs.
+
+-   **Allows Redeclaration**:  
+    The same variable can be declared multiple times in the same scope without throwing an error.
+
+-   **Unexpected Behavior in Loops**:  
+     `var` doesn’t create a new variable per loop iteration, which can result in closure-related bugs.
+    > ✅ Use `let` or `const` instead for predictable and safer scoping.
+
+<br>
+
+## JavaScript Hoisting Explained
 
 Hoisting is JavaScript’s default behavior of moving **declarations** (but **not initializations**) to the top of their scope before the code executes. This allows variables and functions to be referenced before their actual declaration in the code.
 
@@ -6,8 +30,6 @@ Hoisting is JavaScript’s default behavior of moving **declarations** (but **no
 
 -   `var` declarations are hoisted and **initialized with `undefined`**.
 -   They exist from the start of their scope, but their value is `undefined` until the assignment happens.
-
-**Example:**
 
 ```js
 console.log(a); // undefined (no error)
@@ -35,8 +57,6 @@ Variables declared with `let` and `const` are also **hoisted**, but unlike `var`
 
 Attempting to access them before their declaration results in a `ReferenceError`.
 
-### Example:
-
 ```js
 console.log(x); // ReferenceError: Cannot access 'x' before initialization
 let x = 5;
@@ -46,6 +66,8 @@ let x = 5;
 console.log(y); // ReferenceError: Cannot access 'y' before initialization
 const y = 10;
 ```
+
+<br>
 
 ## What is the Temporal Dead Zone (TDZ)?
 
@@ -57,8 +79,6 @@ During this period, the variable exists in memory but **cannot be accessed**, an
 ### Function Declarations
 
 Function declarations are **fully hoisted**, meaning you can call them **before** they are defined in the code.
-
-**Example:**
 
 ```js
 console.log(foo()); // Works fine
@@ -75,8 +95,6 @@ Function expressions behave like variables and follow hoisting rules based on ho
 -   If declared with `var`, the variable is **hoisted and initialized as `undefined`**.
 -   If declared with `let` or `const`, the variable is **hoisted but uninitialized**, and accessing it before declaration results in a `ReferenceError`.
 
-### Example with `var`:
-
 ```js
 console.log(bar); // undefined
 
@@ -85,7 +103,7 @@ var bar = function () {
 };
 ```
 
-## Summary
+<br>
 
 | Feature                           | `var`             | `let` and `const`               |
 | --------------------------------- | ----------------- | ------------------------------- |
@@ -94,7 +112,7 @@ var bar = function () {
 | **Accessible before declaration** | Yes (`undefined`) | No (`ReferenceError` thrown)    |
 | **Scope**                         | Function-scoped   | Block-scoped                    |
 
-## Points
+## Key Points
 
 -   `var` variables are **hoisted and initialized as `undefined`**.
 -   `let` and `const` variables are **hoisted but not initialized**, so accessing them early throws a `ReferenceError` due to the **Temporal Dead Zone (TDZ)**.

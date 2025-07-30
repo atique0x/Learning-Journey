@@ -1,7 +1,7 @@
 let count = 10;
 count = 20; // ✅ Reassignment allowed
 
-if (true) {
+{
     let count = 30; // different variable inside this block
     console.log(count); // 30
 }
@@ -33,3 +33,16 @@ let b;
 b = 1;
 console.log(b); // Output: 1
 // After declaration and assignment, it works normally.
+
+var file = "image.png";
+console.log(file);
+var file = "image.jpg";
+console.log(file);
+file = "image.jpeg";
+console.log(file);
+
+let documents = "word.pdf";
+console.log(documents);
+documents = "";
+// let documents = "word.doc";
+// console.log(documents);

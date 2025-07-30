@@ -108,3 +108,12 @@ kitty.describe();
 // Whiskers makes a noise.
 // Whiskers is a white cat.
 ```
+
+## Summary Table
+
+| Keyword       | Purpose                                             |
+| ------------- | --------------------------------------------------- |
+| `class`       | Defines a class (blueprint for objects)             |
+| `constructor` | Initializes class properties when creating instance |
+| `extends`     | Inherits from another class                         |
+| `super`       | Calls parent constructor or methods                 |
