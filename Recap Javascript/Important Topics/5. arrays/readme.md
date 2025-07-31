@@ -98,9 +98,7 @@ prices.forEach((p) => console.log(p)); // logs 10, 20, 30
 
 <br><br>
 
-# 1. Dynamic HTML Table from User Profiles
-
-This code dynamically builds an HTML table from an array of user profiles. It first creates a table header using the keys of the profile objects. Then, for each profile, it generates a table row displaying the user’s full name, address, phone number, active status, role (with a default if missing), cleaned-up scores, formatted settings with capitalized keys, and a capitalized theme name.
+# 1. Dynamic HTML Table
 
 ```js
 //data format
@@ -210,3 +208,166 @@ showingData();
 
 -   **Optional Chaining (`?.`)**  
     Safely accesses nested properties like `profile.settings?.notifications`.
+
+<br><br>
+
+# 2. Dynamic HTML Table
+
+```js
+//data
+{
+    username: "  atique shahriar  ",
+    email: "atique.shahriar@example.com",
+    roles: ["admin", "editor", "contributor"],
+    scores: [95, 87, null, 76, 88],
+    settings: {
+        theme: "dark",
+        notifications: true,
+        fontSize: "medium",
+        autoSave: true,
+    },
+    lastLogin: "2025-07-28T10:15:00Z",
+}
+```
+
+```js
+function filteredByNotification(usersData = users) {
+    const notifiedUsers = usersData.filter(
+        (user) => user.settings?.notifications === true
+    );
+    display(notifiedUsers);
+}
+
+function slicingUser(usersData = users) {
+    const newUsers = usersData.slice(3, 8);
+    display(newUsers);
+}
+
+function cleanUserName(usersData = users) {
+    usersData.forEach((user) => {
+        user.username = user.username
+            .trim()
+            .split(" ")
+            .map((word) => word[0].toUpperCase() + word.slice(1))
+            .join(" ");
+    });
+    display();
+}
+
+function analyzeScore(usersData = users) {
+    usersData.forEach((user) => {
+        user.scores =
+            user.scores.length === 0
+                ? 0
+                : user.scores
+                      .map((score) => score ?? 0)
+                      .reduce((total, curr) => total + curr);
+    });
+    display();
+}
+
+function roleModified(usersData = users) {
+    usersData.forEach((user) => {
+        user.roles = user.roles.includes("admin")
+            ? "Admin"
+            : user.roles.includes("editor")
+            ? "Editor"
+            : user.roles.includes("moderator")
+            ? "Moderator"
+            : user.roles.includes("user")
+            ? "User"
+            : "Guest";
+    });
+    display();
+}
+
+function sortByScore(usersData = users) {
+    usersData.sort((a, b) => a.scores - b.scores);
+    display();
+}
+
+function display(usersData = users) {
+    const table = document.getElementById("tableTwoId");
+    table.innerHTML = "";
+
+    const tableHead = document.createElement("thead");
+    table.appendChild(tableHead);
+
+    const tableHeadRow = document.createElement("tr");
+    tableHead.appendChild(tableHeadRow);
+
+    Object.keys(usersData[0]).map((eachKey) => {
+        const headData = document.createElement("th");
+        headData.innerText = eachKey[0].toUpperCase() + eachKey.slice(1);
+        tableHead.appendChild(headData);
+    });
+
+    const tableBody = document.createElement("tbody");
+
+    table.appendChild(tableBody);
+
+    usersData.map((user) => {
+        const tableRow = document.createElement("tr");
+        tableRow.innerHTML = `<td>${user.username}</td>
+        <td>${user.email}</td>
+        <td>${user.roles}</td>
+        <td>${user.scores}</td>
+        <td>${
+            user.settings == null
+                ? "Default"
+                : Object.entries(user.settings)
+                      .map(
+                          ([key, value]) =>
+                              `${
+                                  key[0].toUpperCase() +
+                                  key.slice(1).toLowerCase()
+                              }: ${value}`
+                      )
+                      .sort()
+                      .join(" ")
+        }</td>
+        <td>${new Date(user.lastLogin).toDateString()}</td>`;
+
+        tableBody.appendChild(tableRow);
+    });
+}
+```
+
+![My Photo](table3.png)
+![My Photo](table2.png)
+
+### Array Methods
+
+| Method                                 | Usage                                           |
+| -------------------------------------- | ----------------------------------------------- |
+| `slice(start, end)`                    | Extracts a portion of the users array           |
+| `splice(start, deleteCount, ...items)` | Replaces users dynamically                      |
+| `filter()`                             | Filters users based on conditions               |
+| `forEach()`                            | Iterates over users to clean names or calculate |
+| `map()`                                | Transforms user properties                      |
+| `reduce()`                             | Totals up user scores                           |
+| `sort()`                               | Sorts users by score                            |
+| `includes()`                           | Checks if roles include a target role           |
+
+### String Methods
+
+| Method                            | Usage                             |
+| --------------------------------- | --------------------------------- |
+| `trim()`                          | Removes extra spaces from names   |
+| `split(" ")`                      | Breaks full name into parts       |
+| `toUpperCase()` / `toLowerCase()` | Used in formatting                |
+| `join(" ")`                       | Rejoins name parts after cleaning |
+
+### Features
+
+| Concept                   | Description                              |
+| ------------------------- | ---------------------------------------- |
+| `Optional chaining (?.)`  | Safely checks for nested values          |
+| `Nullish coalescing (??)` | Defaults null scores to 0                |
+| `Object.entries()`        | Displays key-value pairs from `settings` |
+| `Ternary operators`       | Short conditional expressions            |
+| `Default parameters`      | Fallback to global `users` array         |
+| `Function declarations`   | Standard JS function definitions         |
+| `Date formatting`         | Converts ISO date to readable format     |
+
+---
