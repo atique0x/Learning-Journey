@@ -1,0 +1,212 @@
+# Javascript Array
+
+### Separate Variables vs Array vs Object
+
+```js
+// Separate variables
+let score1 = 10;
+let score2 = 15;
+let score3 = 20;
+
+// Array instead
+let scores = [10, 15, 20];
+
+// Object instead
+let scoresObj = {
+    score1: 10,
+    score2: 15,
+    score3: 120,
+};
+```
+
+## Why not just use separate variables (a, b, c, ...)?
+
+Problems with many separate variables:
+
+-   Hard to manage
+-   No grouping
+-   No easy iteration
+
+## Why use an Array instead of many separate variables?
+
+-   Arrays group multiple values into a single structure.
+-   You can loop over all items with `for`, `map()`, `forEach()`, etc.
+-   Easy to add, remove, or modify items.
+
+## Why use an Object instead of an Array or separate variables?
+
+-   Objects group related data as **key-value pairs, describing properties.**
+-   When data has named attributes, objects make the data meaningful.
+-   Easy to access specific properties by name.
+
+## Why need an object rather than an array?
+
+1. Arrays use numeric keys (indexes) — **objects use arbitrary keys**
+2. Arrays are for ordered lists — **objects for describing things**
+3. Using meaningful keys makes code readable and logical — Arrays don’t naturally support meaningful keys
+
+> In short:  
+> **Arrays are special objects optimized for ordered data with numeric indexes, while objects are for meaningful key-value pairs with descriptive keys. Both serve different needs — that’s why we have both!**
+
+# JavaScript Array Methods
+
+| **Method**     | **Real-Life Use Case**                           | **Example**                                |
+| -------------- | ------------------------------------------------ | ------------------------------------------ |
+| `push()`       | Add new data to the end of a list                | `arr.push(newItem)`                        |
+| `pop()`        | Remove last item from list                       | `arr.pop()`                                |
+| `unshift()`    | Add item to start                                | `arr.unshift(newMsg)`                      |
+| `shift()`      | Remove first item                                | `arr.shift()`                              |
+| `map()`        | Transform each item for rendering or logic       | `arr.map(x => x * 2)`                      |
+| `forEach()`    | Iterate through each element (no return)         | `arr.forEach(x => console.log(x))`         |
+| `filter()`     | Create new array based on condition              | `arr.filter(x => x.active)`                |
+| `find()`       | Get the **first** matching element               | `arr.find(x => x.id === 3)`                |
+| `findIndex()`  | Get index of first match                         | `arr.findIndex(x => x.name === "Tom")`     |
+| `reduce()`     | Calculate totals, combine values                 | `arr.reduce((sum, p) => sum + p.price, 0)` |
+| `some()`       | Validate if **any** item passes the condition    | `arr.some(x => x.isAdmin)`                 |
+| `every()`      | Check if **all** items pass a condition          | `arr.every(x => x !== null)`               |
+| `includes()`   | Check if a value exists                          | `arr.includes("admin")`                    |
+| `slice()`      | Copy/preview a part of array (pagination, top 5) | `arr.slice(0, 5)`                          |
+| `splice()`     | Add/remove items at specific index (mutates)     | `arr.splice(2, 1)`                         |
+| `join()`       | Convert array to string                          | `arr.join(", ")`                           |
+| `sort()`       | Sort numbers, strings, or objects (mutates)      | `arr.sort((a, b) => a.price - b.price)`    |
+| `toSorted()`   | Immutable version of `sort()` (ES2023+)          | `arr.toSorted((a, b) => a - b)`            |
+| `reverse()`    | Reverses the array order (mutates)               | `arr.reverse()`                            |
+| `toReversed()` | Immutable reverse (ES2023+)                      | `arr.toReversed()`                         |
+| `at()`         | Get value by index (supports negative index)     | `arr.at(-1)`                               |
+| `flat()`       | Flatten nested arrays                            | `[1, [2, [3]]].flat(2)`                    |
+
+> 🔹 Methods marked with a \* modify (mutate) the original array.
+
+---
+
+## 🔄 map() vs forEach()
+
+| **Feature**      | **`map()`**                               | **`forEach()`**                                     |
+| ---------------- | ----------------------------------------- | --------------------------------------------------- |
+| **Purpose**      | Transform elements and return a new array | Perform actions per item without returning anything |
+| **Return Value** | ✅ Returns new array                      | ❌ Returns `undefined`                              |
+| **Use Case**     | When creating a new array                 | When doing side-effects (e.g., logging, UI update)  |
+
+```js
+// map()
+const prices = [10, 20, 30];
+const taxed = prices.map((p) => p * 1.15); // [11.5, 23, 34.5]
+
+// forEach()
+prices.forEach((p) => console.log(p)); // logs 10, 20, 30
+```
+
+<br><br>
+
+# 1. Dynamic HTML Table from User Profiles
+
+This code dynamically builds an HTML table from an array of user profiles. It first creates a table header using the keys of the profile objects. Then, for each profile, it generates a table row displaying the user’s full name, address, phone number, active status, role (with a default if missing), cleaned-up scores, formatted settings with capitalized keys, and a capitalized theme name.
+
+```js
+//data format
+{
+    username: { firstName: "Ayesha", lastName: "Khan" },
+    address: "Chittagong",
+    phone: 5678,
+    isActive: false,
+    role: "User",
+    scores: [5, 4, null],
+    settings: { notifications: true },
+    theme: function () {
+        return "light";
+    },
+}
+```
+
+```js
+function filteredData(profiles = allUsers) {
+    const filteredData = profiles.filter(
+        (profile) => profile.settings?.notifications == true
+    );
+    console.log(filteredData);
+    showingData(filteredData);
+}
+
+function showingData(profiles = allUsers) {
+    const table = document.getElementById("tableId");
+    table.innerHTML = "";
+
+    const tableHead = document.createElement("thead");
+    table.appendChild(tableHead);
+
+    const tableHeadRow = document.createElement("tr");
+    tableHead.appendChild(tableHeadRow);
+
+    Object.keys(profiles[0]).map((eachKey) => {
+        const headData = document.createElement("th");
+        headData.innerText = eachKey[0].toUpperCase() + eachKey.slice(1);
+        tableHead.appendChild(headData);
+    });
+
+    const tableBody = document.createElement("tbody");
+
+    table.appendChild(tableBody);
+
+    profiles.map((eachObject) => {
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+    <td>${eachObject.username.firstName} ${eachObject.username.lastName}</td>
+    <td>${eachObject.address}</td>
+    <td>${eachObject.phone}</td>
+    <td>${eachObject.isActive ? "Active" : "Inactive"}</td>
+    <td>${eachObject.role ?? "Guest"}</td>
+    <td>${
+        eachObject.scores.length == 0
+            ? "---"
+            : eachObject.scores.includes(null)
+            ? eachObject.scores.map((score) => score ?? 0)
+            : eachObject.scores
+    }</td>
+    <td>${
+        eachObject.settings == null
+            ? "Null"
+            : Object.entries(eachObject.settings)
+                  .map(([key, value]) => {
+                      return `${key[0].toUpperCase() + key.slice(1)}: ${value}`;
+                  })
+                  .join("\n")
+    }</td>
+    <td>${
+        eachObject.theme()[0].toUpperCase() + eachObject.theme().slice(1)
+    }</td>
+    `;
+        tableBody.appendChild(newRow);
+    });
+}
+
+showingData();
+```
+
+**Output**
+![My Photo](table1.png)
+
+## Used Array Methods
+
+-   **`.map()`** — iterate over arrays (profiles, keys, scores, settings entries).
+-   **`.join()`** — join array elements into a string.
+-   **`.includes()`** — (used earlier) check for `null` in scores.
+-   **`.filter()`** — filters profiles based on a condition (`notifications == true`).
+
+## Used Object Methods
+
+-   **`Object.keys()`** — get keys of an object (for headers).
+-   **`Object.entries()`** — get `[key, value]` pairs of an object (for settings).
+
+## Used JavaScript Operators & Features
+
+-   **Ternary Operator**  
+    `condition ? valueIfTrue : valueIfFalse` — used for conditional rendering.
+
+-   **Nullish Coalescing Operator (`??`)**  
+    Fallback value if a variable is `null` or `undefined`.
+
+-   **Template Literals**  
+    `` `...${variable}...` `` — used for building dynamic HTML strings.
+
+-   **Optional Chaining (`?.`)**  
+    Safely accesses nested properties like `profile.settings?.notifications`.
