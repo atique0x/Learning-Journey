@@ -6,10 +6,7 @@
         <title>Document</title>
     </head>
     <body>
-        <!-- <button onclick="filteredData()">Filter by Notification</button> -->
-        <!-- <table id="tableId" border="1"></table> -->
-
-        <button onclick="display()">Display as Usual</button>
+        <button onclick="display2()">Display as Usual</button>
         <button
             onclick="
 filteredByNotification()"
@@ -22,9 +19,19 @@ filteredByNotification()"
         <button onclick="roleModified()">Show highest role</button>
         <button onclick="sortByScore()">Sort by score</button>
 
-        <table id="tableTwoId" border="1"></table>
-
-        <!-- <script src="array.js"></script> -->
-        <script src="array2.js"></script>
+        <table id="tableTwoId" border="1">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Score</th>
+                    <th>Setting</th>
+                    <th>Last Login</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <script src="./array3.js"></script>
     </body>
 </html>
