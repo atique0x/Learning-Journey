@@ -82,11 +82,11 @@ for (let i = 0; i < maxValue; i++) {
         console.log(i);
     }
 }
-let value;
+// let value;
 
-do {
-    value = Number(prompt());
-    if (value === 500) break;
-} while (value !== 19000);
+// do {
+//     value = Number(prompt());
+//     if (value === 500) break;
+// } while (value !== 19000);
 
-console.log(value);
+// console.log(value);
