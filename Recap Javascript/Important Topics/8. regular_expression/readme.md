@@ -1,4 +1,4 @@
-# JavaScript Regular Expressions
+# JavaScript Regular Expressions (RegExp)
 
 ## What is RegExp?
 
@@ -88,10 +88,10 @@ console.log(emailRegex.test("user@example.com")); // true
 
 ### Strong Password Validation
 
-**Requirement**: Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number.
+**Requirement**: Minimum 8 characters, at least 1 letter and 1 number.
 
 ```js
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 console.log(passwordRegex.test("abc12345")); // true
 ```
 
@@ -129,32 +129,3 @@ console.log(urlRegex.test("https://www.google.com")); // true
 ```
 
 ---
-
-### Number Format
-
-```js
-const numberCheck = /^\+\d{3}\s\d{4}\s\d{3}\s\d{3}$/;
-
-console.log(numberCheck.test("+880 1744 320 509")); // true
-```
-
-<br>
-
-# Regex Quantifiers Cheat Sheet
-
-| Quantifier | Meaning                           | Example  | Matches                      |
-| ---------- | --------------------------------- | -------- | ---------------------------- |
-| `{n}`      | Exactly n times                   | `a{3}`   | `aaa`                        |
-| `{n,}`     | At least n times (n to ∞)         | `a{2,}`  | `aa`, `aaa`, `aaaa`, ...     |
-| `{n,m}`    | Between n and m times (inclusive) | `a{2,4}` | `aa`, `aaa`, `aaaa`          |
-| `?`        | 0 or 1 time (optional)            | `a?`     | `""` (empty) or `"a"`        |
-| `*`        | 0 or more times                   | `a*`     | `""`, `"a"`, `"aa"`, `"aaa"` |
-| `+`        | 1 or more times                   | `a+`     | `"a"`, `"aa"`, `"aaa"`       |
-
-## Special Case: Exactly 2 OR 6 times
-
-To match exactly **2 or 6** repetitions only (not anything in between), use alternation:
-
-```regex
-(a{2}|a{6})
-```
