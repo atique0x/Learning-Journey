@@ -103,3 +103,12 @@ const loggedIn = {
 console.log(loggedIn);
 console.log(sym1, sym2);
 console.log(loggedIn[sym1]);
+
+const employees = [
+    { name: "Alice", department: "HR" },
+    { name: "Bob", department: "IT" },
+    { name: "Charlie", department: "HR" },
+];
+
+const groupedEmployee = Object.groupBy(employees, (emp) => emp.department);
+console.log(groupedEmployee);

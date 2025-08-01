@@ -166,3 +166,10 @@ const loggedIn = {
 -   `function` → `"function"` (a valid string key)
 
 ---
+
+## `Object.groupBy()` method
+
+```js
+const groupedEmployee = Object.groupBy(employees, (emp) => emp.department);
+console.log(groupedEmployee);
+```
