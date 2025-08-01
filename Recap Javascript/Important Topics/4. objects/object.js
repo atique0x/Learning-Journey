@@ -97,7 +97,9 @@ const loggedIn = {
     undefined: undefined,
     NaN: NaN,
     function: "Function",
+    [sym1]: "key",
 };
 
 console.log(loggedIn);
 console.log(sym1, sym2);
+console.log(loggedIn[sym1]);

@@ -150,7 +150,9 @@ const loggedIn = {
     undefined: undefined,
     NaN: NaN,
     function: "Function",
+    [sym1]: "key",
 };
+//console.log(loggedIn[sym1]); //key
 ```
 
 **Explanation:**
