@@ -371,3 +371,241 @@ function display(usersData = users) {
 | `Date formatting`         | Converts ISO date to readable format     |
 
 ---
+
+<br><br>
+
+# JavaScript `.reduce()` – Concept, Examples, and Iterations
+
+## What is `.reduce()`?
+
+-   `.reduce()` processes an array and reduces it to a single value.
+-   This value can be a number, string, object, or even another array.
+-   It applies a callback function to each item, **accumulating a result step-by-step**.
+
+## Syntax Overview
+
+```js
+array.reduce((accumulator, currentValue, index, array) => {
+    // return updated accumulator
+}, initialValue);
+```
+
+-   **accumulator** → stores result across each iteration
+-   **currentValue** → current array item
+-   **initialValue** → starting value of the accumulator (like 0, {}, or [])
+
+## Use Cases with Explanations & Iteration Steps
+
+## 1. Sum of Numbers
+
+```js
+const numbers = [1, 2, 3, 4];
+const result = numbers.reduce((acc, curr) => acc + curr, 0);
+console.log(result); // 10
+```
+
+**Iteration Table**
+
+| Step | acc | cur | acc + cur |
+| ---- | --- | --- | --------- |
+| 1    | 0   | 1   | 1         |
+| 2    | 1   | 2   | 3         |
+| 3    | 3   | 3   | 6         |
+| 4    | 6   | 4   | 10        |
+
+> **Final Result:** `10`
+
+---
+
+## 2. Join Words into a Sentence
+
+```js
+const words = ["JavaScript", "is", "fun"];
+const text = words.reduce((acc, curr) => acc + " " + curr, "");
+console.log(text); // " JavaScript is fun"
+```
+
+**Iteration Table**
+| Step | acc | cur | acc + " " + cur |
+| ---- | ---------------- | ---------- | -------------------- |
+| 1 | "" | JavaScript | " JavaScript" |
+| 2 | " JavaScript" | is | " JavaScript is" |
+| 3 | " JavaScript is" | fun | " JavaScript is fun" |
+
+> **Final Result:** `"JavaScript is fun"`
+
+---
+
+## 3. Flatten Nested Arrays
+
+```js
+const nested = [[1, 2], [3, 4], [5]];
+const flatArr = nested.reduce((acc, cur) => acc.concat(cur));
+console.log(flatArr); // [1, 2, 3, 4, 5]
+```
+
+**Iteration Table**
+
+| Step | acc          | cur    | Result          |
+| ---- | ------------ | ------ | --------------- |
+| 1    | []           | [1, 2] | [1, 2]          |
+| 2    | [1, 2]       | [3, 4] | [1, 2, 3, 4]    |
+| 3    | [1, 2, 3, 4] | [5]    | [1, 2, 3, 4, 5] |
+
+> **Final Result:** `[1, 2, 3, 4, 5]`
+
+---
+
+## 4. Count Duplicates in Array
+
+```js
+const fruitsCount = fruits.reduce((acc, cur) => {
+    acc[cur] = (acc[cur] || 0) + 1;
+    return acc;
+}, {});
+console.log(fruitsCount);
+// { apple: 2, banana: 2, orange: 1 }
+```
+
+**Iteration Table**
+
+| Step | acc                                | cur    | Result                             |
+| ---- | ---------------------------------- | ------ | ---------------------------------- |
+| 1    | {}                                 | apple  | { apple: 1 }                       |
+| 2    | { apple: 1 }                       | banana | { apple: 1, banana: 1 }            |
+| 3    | { apple: 1, banana: 1 }            | apple  | { apple: 2, banana: 1 }            |
+| 4    | { apple: 2, banana: 1 }            | orange | { apple: 2, banana: 1, orange: 1 } |
+| 5    | { apple: 2, banana: 1, orange: 1 } | banana | { apple: 2, banana: 2, orange: 1 } |
+
+> **Final Result:** `{ apple: 2, banana: 2, orange: 1 }`
+
+---
+
+## 5. Group Users by Role
+
+```js
+const userGrouped = users.reduce((acc, cur) => {
+    if (!acc[cur.role]) {
+        acc[cur.role] = [];
+    }
+    acc[cur.role].push(cur);
+    return acc;
+}, {});
+console.log(userGrouped);
+```
+
+**Iteration Table**
+
+| Step | acc                             | cur           | Result                                   |
+| ---- | ------------------------------- | ------------- | ---------------------------------------- |
+| 1    | {}                              | Alice/admin   | { admin: [Alice] }                       |
+| 2    | { admin: [Alice] }              | Bob/user      | { admin: [Alice], user: [Bob] }          |
+| 3    | { admin: [Alice], user: [Bob] } | Charlie/admin | { admin: [Alice, Charlie], user: [Bob] } |
+
+> **Final Result:** Grouped users by role
+
+---
+
+## 6. Average Score from Array of Objects
+
+```js
+const students = [
+    { name: "A", score: 80 },
+    { name: "B", score: 70 },
+    { name: "C", score: 90 },
+];
+
+const average = students.reduce((acc, cur, index, students) => {
+    return acc + cur.score / students.length;
+}, 0);
+console.log(average); // 80
+```
+
+Assume we divide the score by total count (3) each time.
+
+**Iteration Table**
+
+| Step | acc   | cur.score | acc + (score / 3) |
+| ---- | ----- | --------- | ----------------- |
+| 1    | 0     | 80        | 26.67             |
+| 2    | 26.67 | 70        | 50.00             |
+| 3    | 50.00 | 90        | 80.00             |
+
+> **Final Result:** `80.00` (average score)
+
+---
+
+## 7. Convert Array to Object by ID
+
+```js
+const items = [
+    { id: 1, value: "a" },
+    { id: 2, value: "b" },
+    { id: 3, value: "c" },
+];
+
+const reduceItem = items.reduce((acc, cur) => {
+    acc[cur.id] = cur.value;
+    return acc;
+}, {});
+console.log(reduceItem);
+// { 1: "a", 2: "b", 3: "c" }
+```
+
+**Iteration Table**
+
+| Step | acc                | cur.id | Result                     |
+| ---- | ------------------ | ------ | -------------------------- |
+| 1    | {}                 | 1      | { 1: "a" }                 |
+| 2    | { 1: "a" }         | 2      | { 1: "a", 2: "b" }         |
+| 3    | { 1: "a", 2: "b" } | 3      | { 1: "a", 2: "b", 3: "c" } |
+
+> **Final Result:** `{ 1: "a", 2: "b", 3: "c" }`
+
+---
+
+## 8. Group Employee Names by Department
+
+```js
+const employees = [
+    { name: "Alice", department: "HR" },
+    { name: "Bob", department: "IT" },
+    { name: "Charlie", department: "HR" },
+];
+
+const groupedEmployee = employees.reduce((acc, cur) => {
+    if (!acc[cur.department]) {
+        acc[cur.department] = [];
+    }
+    acc[cur.department].push(cur.name);
+    return acc;
+}, {});
+console.log(groupedEmployee);
+// { HR: ["Alice", "Charlie"], IT: ["Bob"] }
+```
+
+**Iteration Table**
+
+| Step | acc                      | cur        | Result                                    |
+| ---- | ------------------------ | ---------- | ----------------------------------------- |
+| 1    | {}                       | Alice/HR   | { HR: ["Alice"] }                         |
+| 2    | { HR: ["Alice"] }        | Bob/IT     | { HR: ["Alice"], IT: ["Bob"] }            |
+| 3    | { HR: [...], IT: [...] } | Charlie/HR | { HR: ["Alice", "Charlie"], IT: ["Bob"] } |
+
+> **Final Result:** Grouped names by department
+
+---
+
+## Summary
+
+`.reduce()` is a powerful tool for any data transformation or accumulation task.
+
+You can use it to:
+
+-   Sum or average values
+-   Convert arrays into objects
+-   Group by categories
+-   Count frequency of values
+-   Flatten nested arrays
+
+Think of `.reduce()` as a flexible loop — you control how it accumulates and what it returns.

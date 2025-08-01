@@ -6,15 +6,14 @@
         <title>Document</title>
     </head>
     <body>
-        <!-- <button onclick="filteredData()">Filter by Notification</button> -->
-        <!-- <table id="tableId" border="1"></table> -->
+        <button onclick="showingData()">Show data</button>
+        <button onclick="filteredData()">Filter by Notification</button>
+        <table id="tableId" border="1"></table>
         <br />
+        <br /><br />
 
         <button onclick="display()">Display as Usual</button>
-        <button
-            onclick="
-filteredByNotification()"
-        >
+        <button onclick="filteredByNotification()">
             Filter By Notification
         </button>
         <button onclick="slicingUser()">Show 5 User</button>
@@ -23,10 +22,8 @@ filteredByNotification()"
         <button onclick="roleModified()">Show highest role</button>
         <button onclick="sortByScore()">Sort by score</button>
         <br /><br />
-
         <table id="tableTwoId" border="1"></table>
-
-        <!-- <script src="array.js"></script> -->
-        <script src="array2.js"></script>
+        <script src="array.js"></script>
+        <script src="arrayReduce.js"></script>
     </body>
 </html>
