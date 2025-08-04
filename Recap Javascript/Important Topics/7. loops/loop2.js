@@ -90,18 +90,25 @@ for (let i = 0; i < menuLength; i++) {
 
 console.log(menu);
 
-const menuArr = [];
+const recursiveMenu = document.getElementById("recursiveNav");
 
 function navDisplay(mainMenu) {
-    for (let i = 0; i < mainMenu.length; i++) {
-        menuArr.push(mainMenu[i].title);
-        if (mainMenu[i].subMenu) {
-            navDisplay(mainMenu[i].subMenu);
+    const ul = document.createElement("ul");
+
+    for (let menu of mainMenu) {
+        const li = document.createElement("li");
+        li.innerText = menu.title;
+
+        if (menu.subMenu) {
+            const subUl = navDisplay(menu.subMenu);
+            li.appendChild(subUl);
         }
+        ul.appendChild(li);
     }
+    return ul;
 }
-navDisplay(menu);
-console.log(menuArr);
+const menuUl = navDisplay(menu);
+recursiveMenu.appendChild(menuUl);
 
 let allValue = [];
 let submitValue = {};
