@@ -6,6 +6,98 @@
         <title>Document</title>
     </head>
     <body>
+        <!-- <ul>
+            <li>a</li>
+            <li>b</li>
+            <li>
+                c
+                <ul>
+                    <li>1</li>
+                    <li>
+                        2
+                        <ul>
+                            <li>x</li>
+                            <li>y</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul> -->
+
+        <ul id="navId"></ul>
+        <nav id="recursiveNav"></nav>
+
+        <br /><br />
+
+        <!-- <form action="" id="selectCategory">
+            <select>
+                <option value="clothing">Clothing</option>
+                <option value="food">
+                    Food
+                    <select name="" id="">
+                        <option value="fruit">
+                            Fruit
+                            <input type="text" />
+                        </option>
+                        <option value="fruit">
+                            Vegetable
+                            <select name="" id="">
+                                <option value="fresh">
+                                    Fresh
+                                    <input type="text" />
+                                </option>
+                                <option value="dryed">
+                                    Dryed
+                                    <input type="text" name="" id="" />
+                                </option>
+                            </select>
+                        </option>
+                    </select>
+                </option>
+            </select>
+        </form> -->
+
+        <form id="selectCategory">
+            <select id="mainCategory">
+                <option value="">-- Select Category --</option>
+                <option value="Food">Food</option>
+                <option value="Clothing">Clothing</option>
+            </select>
+
+            <div id="foodSelection" style="display: none">
+                <label>Food Type:</label>
+                <select id="foodType">
+                    <option value="">-- Select --</option>
+                    <option value="Fruit">Fruit</option>
+                    <option value="Vegetable">Vegetable</option>
+                </select>
+            </div>
+
+            <div id="vegetableSelection" style="display: none">
+                <label>Vegetable Type:</label>
+                <select id="vegetableType">
+                    <option value="">-- Select --</option>
+                    <option value="Fresh">Fresh</option>
+                    <option value="Dried">Dried</option>
+                </select>
+            </div>
+
+            <div id="textInput" style="display: none">
+                <label>Details:</label>
+                <input
+                    id="itemInput"
+                    type="text"
+                    placeholder="Enter Item"
+                    required
+                />
+                <input type="submit" onclick="submitBtn(event)" />
+            </div>
+        </form>
+        <br />
+        <button onclick="displayAllInputValue()">Show all added value</button>
+
         <script src="./loop.js"></script>
+        <script src="./loop2.js
+        "></script>
     </body>
 </html>
