@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            div {
+                display: flex;
+                flex-direction: column;
+                max-width: 500px;
+                margin: 0 auto;
+                padding-bottom: 10px;
+            }
+            #selectionItem {
+                height: 32px;
+            }
+            #category {
+                height: 24px;
+            }
+            #btn {
+                margin-top: 12px;
+                padding: 10px;
+                background-color: lightskyblue;
+                border: none;
+            }
+            #btn:hover {
+                font-weight: 600;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="" onsubmit="formSubmit(event)">
+            <div>
+                <label for="">Add Category</label>
+                <input type="text" name="category" id="category" required />
+            </div>
+
+            <div>
+                <label for="">Select Parent</label>
+                <select name="parent" id="selectionItem">
+                    <option value=""><--Select Category--></option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" id="btn" />
+            </div>
+        </form>
+        <br /><br />
+        <nav id="recursiveNav"></nav>
+        <script src="./script.js"></script>
+    </body>
+</html>
