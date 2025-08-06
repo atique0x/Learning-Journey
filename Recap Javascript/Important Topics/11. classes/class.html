@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            h2 {
+                margin-bottom: 4px;
+                text-align: center;
+                color: dodgerblue;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            input {
+                width: 100%;
+                padding: 10px 10px;
+                border: 1px solid gainsboro;
+            }
+            select,
+            option {
+                width: 106%;
+                padding: 10px 10px;
+                border: 1px solid gainsboro;
+            }
+
+            #submitBtn {
+                width: 60%;
+                margin: 0 auto;
+                cursor: pointer;
+                background-color: lightskyblue;
+                border: none;
+            }
+            table,
+            tr,
+            th {
+                border-collapse: collapse;
+            }
+            th,
+            td {
+                padding: 4px;
+                min-width: 100px;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <form action="" onsubmit="userInfo(event)">
+            <h2>User Form</h2>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Type user name"
+                required
+            />
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Type user email"
+                required
+            />
+
+            <input
+                type="number"
+                name="age"
+                min="18"
+                max="65"
+                placeholder="Type user age"
+                required
+            />
+            <select name="department" id="" required>
+                <option value=""><--Select Department--></option>
+                <option value="IT">IT</option>
+                <option value="Design">Design</option>
+                <option value="DevOps">DevOps</option>
+                <option value="Testing">Testing</option>
+            </select>
+
+            <input type="submit" value="Add User" id="submitBtn" required />
+        </form>
+        <br />
+        <br />
+        <button onclick="activeStatusToggling()">Active Status Toggle</button>
+        <button onclick="deleteUser()">Delete User by Email</button>
+        <button onclick="activeByDepartment()">
+            Active By Department Name
+        </button>
+        <br />
+        <br />
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Serial</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Department</th>
+                    <th>Created Time</th>
+                    <th>Active Status</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+        <script src="./class.js"></script>
+    </body>
+</html>
