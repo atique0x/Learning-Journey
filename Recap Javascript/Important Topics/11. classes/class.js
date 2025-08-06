@@ -226,10 +226,10 @@ const userInfo = (e) => {
     e.target.email.value = "";
     e.target.age.value = "";
 };
-const activeStatusToggling = () => {
-    console.log("Toggle Clicked");
-    userManagement.activeToggle();
-};
+// const activeStatusToggling = () => {
+//     console.log("Toggle Clicked");
+//     userManagement.activeToggle();
+// };
 
 const deleteUser = () => {
     const userEmail = prompt("Type user id need to delete");
@@ -306,18 +306,29 @@ class UserManagementSystem {
                 }
                 tr.appendChild(td);
             }
+            const td = document.createElement("td");
+            const button = document.createElement("button");
+            button.innerText = "Active Toggle";
+            button.onclick = () => {
+                user.isActive = !user.isActive;
+                this.saveToLocalStorage();
+                this.userCreateTable();
+            };
+            td.appendChild(button);
+            tr.appendChild(td);
             tableBody.appendChild(tr);
         }
+        console.log(tableBody);
     }
 
-    activeToggle() {
-        this.user.forEach((user) => {
-            console.log(user);
-            user.isActive = !user.isActive;
-            this.saveToLocalStorage();
-            this.userCreateTable();
-        });
-    }
+    // activeToggle() {
+    //     this.user.forEach((user) => {
+    //         console.log(user);
+    //         user.isActive = !user.isActive;
+    //         this.saveToLocalStorage();
+    //         this.userCreateTable();
+    //     });
+    // }
     deleteUserByEmail(userEmail) {
         const isFind = this.user.find((user) => user.email == userEmail);
         if (isFind) {
