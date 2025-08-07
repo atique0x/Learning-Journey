@@ -32,18 +32,15 @@ const nav = (alldata) => {
     return ul;
 };
 
-function buildFullChain(item, allItems) {
-    let chain = [item.category];
-    let current = item;
+function buildFullChain(item) {
+    const chain = [];
 
-    while (current.parentId !== null) {
-        const parent = allItems.find((i) => i._id === current.parentId);
-        if (!parent) break;
-        chain.unshift(parent.category);
-        current = parent;
+    while (item) {
+        chain.unshift(item.category);
+        item = allItems.find((cat) => cat._id === item.parentId);
     }
 
-    return chain.join(" -> ");
+    return chain.join(" > ");
 }
 
 function formSubmit(e) {
