@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            #parent,
+            #child,
+            #parentIndex {
+                height: 24px;
+                width: 300px;
+                margin-bottom: 4px;
+            }
+
+            #btn {
+                margin-top: 12px;
+                padding: 10px;
+                background-color: lightskyblue;
+                border: none;
+            }
+            #btn:hover {
+                font-weight: 600;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h2>Problem - 1</h2>
+            <div id="listedId"></div>
+        </div>
+        <br />
+        <br />
+        <div>
+            <form action="" onsubmit="formSubmit(event)">
+                <div>
+                    <label for="">Parent</label>
+                    <input type="text" name="parent" id="parent" />
+                </div>
+
+                <div>
+                    <label for="">Child</label>
+                    <input type="text" name="child" id="child" />
+                </div>
+                <div>
+                    <label for="">Parent Index</label>
+                    <input type="number" name="parentIndex" id="parentIndex" />
+                </div>
+
+                <div>
+                    <input type="submit" id="btn" />
+                </div>
+            </form>
+        </div>
+        <div id="listedId2"></div>
+        <br />
+        <br />
+        <h2>Problem-3</h2>
+        <div>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Total Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>
