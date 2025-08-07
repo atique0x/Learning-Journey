@@ -332,8 +332,19 @@ class UserManagementSystem {
                 }
                 tr.appendChild(td);
             }
+            const td = document.createElement("td");
+            const button = document.createElement("button");
+            button.innerText = "Active Toggle";
+            button.onclick = () => {
+                user.isActive = !user.isActive;
+                this.saveToLocalStorage();
+                this.userCreateTable();
+            };
+            td.appendChild(button);
+            tr.appendChild(td);
             tableBody.appendChild(tr);
         }
+        console.log(tableBody);
     }
 
     activeToggle() {
