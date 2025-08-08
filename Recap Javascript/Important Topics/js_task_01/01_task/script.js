@@ -186,20 +186,25 @@ const transactions = [
 //
 //Problem-2
 const allItems = {};
+const parent = [];
 function formSubmit(e) {
     e.preventDefault();
 
     const parentValue = e.target.parent.value.trim();
     const childValue = e.target.child.value.trim();
     const parentIndex = e.target.parentIndex.value.trim();
-    if (!allItems[parentValue]) {
-        allItems[parentValue] = [];
+
+    if (!allItems[parentIndex]) {
+        allItems[parentIndex] = [];
+        parent.push(parentValue);
     }
-    allItems[parentValue].push(childValue);
+
+    allItems[parentIndex].push(childValue);
     e.target.parent.value = "";
     e.target.child.value = "";
     e.target.parentIndex.value = "";
     console.log(allItems);
+    console.log(parent);
     showValues(allItems);
 }
 let listedIdSection = document.getElementById("listedId2");
@@ -209,7 +214,7 @@ function showValues(items) {
     for (let key in items) {
         const h4 = document.createElement("h4");
         const itemArr = items[key];
-        h4.innerText = key;
+        h4.innerText = parent[key];
         listedIdSection.appendChild(h4);
         for (let val of itemArr) {
             if (val) {
