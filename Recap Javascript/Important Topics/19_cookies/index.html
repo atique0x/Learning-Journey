@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        button.deleteBtn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button.deleteBtn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Set a Cookie</h2>
+    <form id="cookieForm">
+        <label>
+            Cookie Key:
+            <input type="text" id="cookieKey" required />
+        </label>
+        <br /><br />
+        <label>
+            Cookie Value:
+            <input type="text" id="cookieValue" required />
+        </label>
+        <br /><br />
+        <button type="submit">Set Cookie</button>
+    </form>
+
+    <p id="message" style="display:none;"></p>
+
+    <h3>Current Cookies</h3>
+    <table id="cookiesTable">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Cookies will be listed here -->
+        </tbody>
+    </table>
+    <script src="./cookies.js"></script>
+</body>
+
+</html>
