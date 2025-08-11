@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>Div-1</div>
+    <ul id="list">
+        <li>Item 1</li>
+        <li class="selected">Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <div>Div-2</div>
+
+    <script>
+        const selected = document.querySelector('.selected');
+        console.log(selected);
+        // Parent
+        const list = selected.parentElement; // <ul id="list">
+        console.log(list);
+
+        // Children of the list
+        const allItems = list.children; // HTMLCollection of 3 <li> 
+        console.log(allItems);
+
+        // Next sibling element
+        const next = selected.nextElementSibling; // <li>Item 3</li>
+        console.log(next);
+
+        // Previous sibling element
+        const prev = selected.previousElementSibling; // <li>Item 1</li>
+        console.log(prev);
+
+        const prevElement = list.previousElementSibling;
+        console.log(prevElement);
+
+        const nextElement = list.nextElementSibling;
+        console.log(nextElement);
+    </script>
+</body>
+
+</html>
