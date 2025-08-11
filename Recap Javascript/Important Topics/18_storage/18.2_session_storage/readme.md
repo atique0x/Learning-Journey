@@ -52,8 +52,6 @@ Session Storage is useful for temporary data that should only last for the curre
     sessionStorage.clear();
     ```
 
----
-
 ## Important Details
 
 -   Only strings can be stored.
