@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="loadBtn">Load Users</button>
+    <br>
+    <div id="output" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;"></div>
+    <br>
+    <br>
+
+    <h2>User Management</h2>
+
+    <form onsubmit="userForm(event)">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <button type="submit">Add User</button>
+    </form>
+    <br>
+    <div id="status" class="loading"></div>
+    <br>
+    <button onclick="loadUsers()">Load User</button>
+    <br>
+
+    <table id="usersTable" style="display:none;" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div id="errorMsg" class="error"></div>
+
+    <script src="./fetch_api.js"></script>
+</body>
+
+</html>
