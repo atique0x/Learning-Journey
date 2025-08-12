@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+    <p class="text-center bg-blue-300  font-medium text-2xl py-4">Show your location</p>
+    <button onclick="showLocation()"
+        class="bg-blue-400 text-white rounded-sm mt-4 ml-4 py-2 px-6 hover:bg-blue-500 cursor-pointer font-medium">Show
+        location</button>
+    <button class="bg-blue-400 text-white rounded-sm mt-4 ml-4 py-2 px-6 hover:bg-blue-500 cursor-pointer font-medium"
+        onclick="zoomIn()">Zoom In</button>
+    <button class="bg-blue-400 text-white rounded-sm mt-4 ml-4 py-2 px-6 hover:bg-blue-500 cursor-pointer font-medium"
+        onclick="zoomOut()">Zoom Out</button>
+
+    <br>
+    <br>
+    <iframe width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade" class="mx-auto" id="mapId"></iframe>
+
+    </iframe>
+    <script src="./script.js"></script>
+</body>
+
+</html>
