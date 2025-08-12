@@ -6,11 +6,18 @@ Cookies can be set by the server via HTTP headers or by JavaScript on the client
 
 **Main uses:**
 
--   Authentication (session management)
--   Personalization
--   Tracking user activity
+- Authentication (session management)
+- Personalization
+- Tracking user activity
 
 Cookies have properties such as expiration date, path, domain, Secure flag, HttpOnly, and SameSite policy.
+
+## Syntax
+
+```js
+document.cookie =
+  "cookie-name=cookie-value; expires=GMT-date-string; path=path; secure; SameSite=Strict | Lax | None>";
+```
 
 ## Cookie Characteristics
 
@@ -25,61 +32,61 @@ Cookies have properties such as expiration date, path, domain, Secure flag, Http
 
 ## Cookie Properties
 
--   **Name=Value:** The stored data.
--   **Expires / Max-Age:** Expiration time of the cookie.
--   **Domain:** Which domain can access the cookie.
--   **Path:** URL path scope.
--   **Secure:** Cookie sent only over HTTPS.
--   **HttpOnly:** Cannot be accessed via JavaScript (helps prevent XSS).
--   **SameSite:** Controls cross-site request behavior (Strict, Lax, or None).
+- **Name=Value:** The stored data.
+- **Expires / Max-Age:** Expiration time of the cookie. **[Max-Age=0 tells the browser to delete the cookie immediately]**
+- **Domain:** Which domain can access the cookie.
+- **Path:** URL path scope.
+- **Secure:** Cookie sent only over HTTPS.
+- **HttpOnly:** Cannot be accessed via JavaScript (helps prevent XSS).
+- **SameSite:** Controls cross-site request behavior (Strict, Lax, or None).
 
 ## How to Work with Cookies in JavaScript (Conceptual Overview)
 
--   **Setting a Cookie:**
-    The string format is: "name=value; property1; property2; ..."
--   Date format: Fri, 31 Dec 2025 23:59:59 GMT
+- **Setting a Cookie:**
+  The string format is: "name=value; property1; property2; ..."
+- Date format: Fri, 31 Dec 2025 23:59:59 GMT
 
-    ```js
+  ```js
+  document.cookie =
+    "username=Atique; expires=Fri, 31 Dec 2025 23:59:59 GMT; path=/";
+  ```
+
+- **Reading Cookies:**
+  Cookies are returned as a single string separated by semicolons (`;`).
+
+  ```js
+  console.log(document.cookie);
+  // Output: "username=Atique; theme=dark"
+  ```
+
+- **Parsing Cookies:**
+  You can parse the cookie string to extract a specific cookie’s value by name.
+
+  ```js
+  function getCookie(name = "password") {
+    const cookies = document.cookie.split(";");
+    for (let cookie of cookies) {
+      const [key, value] = cookie.trim().split("=");
+      if (key === name) {
+        return value;
+      }
+    }
+    return null; // cookie not found
+  }
+  console.log(getCookie()); // logs the password cookie value
+  ```
+
+- **Deleting a Cookie:**
+  Set the cookie with an expiration date in the past to remove it.
+  ```js
+  function deleteCookie(name) {
     document.cookie =
-        "username=Atique; expires=Fri, 31 Dec 2025 23:59:59 GMT; path=/";
-    ```
-
--   **Reading Cookies:**
-    Cookies are returned as a single string separated by semicolons (`;`).
-
-    ```js
-    console.log(document.cookie);
-    // Output: "username=Atique; theme=dark"
-    ```
-
--   **Parsing Cookies:**
-    You can parse the cookie string to extract a specific cookie’s value by name.
-
-    ```js
-    function getCookie(name = "password") {
-        const cookies = document.cookie.split(";");
-        for (let cookie of cookies) {
-            const [key, value] = cookie.trim().split("=");
-            if (key === name) {
-                return value;
-            }
-        }
-        return null; // cookie not found
-    }
-    console.log(getCookie()); // logs the password cookie value
-    ```
-
--   **Deleting a Cookie:**
-    Set the cookie with an expiration date in the past to remove it.
-    ```js
-    function deleteCookie(name) {
-        document.cookie =
-            name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    }
-    // Usage:
-    deleteCookie("username");
-    deleteCookie("password");
-    ```
+      name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
+  // Usage:
+  deleteCookie("username");
+  deleteCookie("password");
+  ```
 
 <br>
 
@@ -111,11 +118,15 @@ Cookies have properties such as expiration date, path, domain, Secure flag, Http
 
 ## Extra
 
--   Use encodeURIComponent when setting cookie values with special characters.
+- Use encodeURIComponent when setting cookie values with special characters.
 
--   Use decodeURIComponent when reading cookie values to get original content.
+- Use decodeURIComponent when reading cookie values to get original content.
 
 <br>
+<br>
+
+### LocalStorage & Cookies: https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/26_dom_manipulation_traversal/project/index.html
+
 <br>
 
 ## Example
@@ -128,85 +139,85 @@ const form = document.getElementById("cookieForm");
 const cookiesTableBody = document.querySelector("#cookiesTable tbody");
 
 function setCookie(name, value, days) {
-    const expires = new Date(Date.now() + days * 864e5).toUTCString();
-    document.cookie = `${name}=${encodeURIComponent(
-        value
-    )}; expires=${expires}; path=/;`;
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(
+    value
+  )}; expires=${expires}; path=/;`;
 }
 
 function getAllCookies() {
-    const cookies = document.cookie ? document.cookie.split("; ") : [];
-    const result = [];
+  const cookies = document.cookie ? document.cookie.split("; ") : [];
+  const result = [];
 
-    for (let i = 0; i < cookies.length; i++) {
-        const parts = cookies[i].split("=");
-        const key = parts[0];
-        const value = decodeURIComponent(parts.slice(1).join("="));
-        result.push({ key, value });
-    }
+  for (let i = 0; i < cookies.length; i++) {
+    const parts = cookies[i].split("=");
+    const key = parts[0];
+    const value = decodeURIComponent(parts.slice(1).join("="));
+    result.push({ key, value });
+  }
 
-    return result;
+  return result;
 }
 
 function deleteCookie(name) {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 }
 
 function renderCookies() {
-    const cookies = getAllCookies();
-    cookiesTableBody.innerHTML = "";
+  const cookies = getAllCookies();
+  cookiesTableBody.innerHTML = "";
 
-    if (cookies.length === 0) {
-        cookiesTableBody.innerHTML =
-            '<tr><td colspan="3">No cookies found</td></tr>';
-        return;
-    }
+  if (cookies.length === 0) {
+    cookiesTableBody.innerHTML =
+      '<tr><td colspan="3">No cookies found</td></tr>';
+    return;
+  }
 
-    cookies.forEach(({ key, value }) => {
-        const tr = document.createElement("tr");
+  cookies.forEach(({ key, value }) => {
+    const tr = document.createElement("tr");
 
-        const tdKey = document.createElement("td");
-        tdKey.textContent = key;
+    const tdKey = document.createElement("td");
+    tdKey.textContent = key;
 
-        const tdValue = document.createElement("td");
-        tdValue.textContent = value;
+    const tdValue = document.createElement("td");
+    tdValue.textContent = value;
 
-        const tdAction = document.createElement("td");
-        const delBtn = document.createElement("button");
+    const tdAction = document.createElement("td");
+    const delBtn = document.createElement("button");
 
-        delBtn.textContent = "Delete";
-        delBtn.className = "deleteBtn";
+    delBtn.textContent = "Delete";
+    delBtn.className = "deleteBtn";
 
-        delBtn.onclick = () => {
-            deleteCookie(key);
-            alert(`Cookie "${key}" deleted`);
-            renderCookies();
-        };
+    delBtn.onclick = () => {
+      deleteCookie(key);
+      alert(`Cookie "${key}" deleted`);
+      renderCookies();
+    };
 
-        tdAction.appendChild(delBtn);
+    tdAction.appendChild(delBtn);
 
-        tr.appendChild(tdKey);
-        tr.appendChild(tdValue);
-        tr.appendChild(tdAction);
+    tr.appendChild(tdKey);
+    tr.appendChild(tdValue);
+    tr.appendChild(tdAction);
 
-        cookiesTableBody.appendChild(tr);
-    });
+    cookiesTableBody.appendChild(tr);
+  });
 }
 
 form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const key = document.getElementById("cookieKey").value.trim();
-    const value = document.getElementById("cookieValue").value.trim();
-    if (key && value) {
-        setCookie(key, value, 7);
-        alert(`Cookie "${key}" set with value "${value}"`);
-        form.reset();
-        renderCookies();
-    }
+  e.preventDefault();
+  const key = document.getElementById("cookieKey").value.trim();
+  const value = document.getElementById("cookieValue").value.trim();
+  if (key && value) {
+    setCookie(key, value, 7);
+    alert(`Cookie "${key}" set with value "${value}"`);
+    form.reset();
+    renderCookies();
+  }
 });
 
 window.onload = () => {
-    renderCookies();
+  renderCookies();
 };
 ```
 
