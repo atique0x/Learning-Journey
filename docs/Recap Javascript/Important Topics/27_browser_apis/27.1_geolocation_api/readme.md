@@ -47,6 +47,8 @@ The position object passed to success callback contains:
 
 ## Example
 
+Link: https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/27_browser_apis/27.1_geolocation_api/index.html
+
 ```js
 function showLocation() {
   if (navigator.geolocation) {
