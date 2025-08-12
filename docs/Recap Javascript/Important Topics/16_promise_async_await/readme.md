@@ -128,6 +128,9 @@ This pattern allows you to define how the Promise will complete based on the out
 > Async/await = Promise chains + better syntax. No exclusive functionality.
 
 <br>
+
+### Project Link: https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/16_promise_async_await/project/index.html
+
 <br>
 
 # Promise & async-await Example
