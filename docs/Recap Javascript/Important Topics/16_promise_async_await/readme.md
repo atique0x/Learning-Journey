@@ -84,12 +84,12 @@ Inside the executor function:
 
 This pattern allows you to define how the Promise will complete based on the outcome of the async operation.
 
-### Promise and Event Loop: https://github.com/atique0x/Learning-Journey/tree/main/docs/Recap%20Javascript/Important%20Topics/22_event_loop
+### Promise and Event Loop: [Doc Link](https://github.com/atique0x/Learning-Journey/tree/main/docs/Recap%20Javascript/Important%20Topics/22_event_loop)
 
 <br>
 <br>
 
-# Detailed Note on JavaScript Async/Await
+# JavaScript Async/Await
 
 ## What is Async/Await?
 
@@ -129,7 +129,7 @@ This pattern allows you to define how the Promise will complete based on the out
 
 <br>
 
-### Project Link: https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/16_promise_async_await/project/index.html
+### Project Link: [Async-Await Project Live Link](https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/16_promise_async_await/project/index.html)
 
 <br>
 
