@@ -42,15 +42,14 @@ In JavaScript, errors can happen for many reasons:
 
 This document provides an overview of the most common JavaScript error types and when they typically occur.
 
-| Error Type       | Description                                            |
-| ---------------- | ------------------------------------------------------ |
-| `SyntaxError`    | Occurs when code has invalid syntax.                   |
-| `ReferenceError` | Variable that doesn't exist is accessed.               |
-| `TypeError`      | Wrong type used (e.g., call a number like a function). |
-| `RangeError`     | A value is out of the allowable range.                 |
-| `EvalError`      | Issues related to the `eval()` function (rare).        |
-| `URIError`       | Problems with `encodeURI()` or `decodeURI()`.          |
-| `AggregateError` | Represents multiple errors (e.g., in `Promise.any()`). |
+| Error Type         | What it is                                                                                     | Common Causes                                                                                                         | Example                                                                                                                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **SyntaxError**    | Occurs when the code doesn’t follow JS syntax rules.                                           | Missing/extra brackets, parentheses, quotes; incorrect keywords; missing semicolons.                                  | `if (true { console.log("Hello"); }`                                                                                                                                               |
+| **ReferenceError** | Accessing a variable that does not exist in the current scope.                                 | Misspelled variable names; accessing variables before declaration (`let`/`const`); undeclared globals in strict mode. | `console.log(a); // ReferenceError`                                                                                                                                                |
+| **TypeError**      | Using a value in an inappropriate way.                                                         | Calling non-function as a function; accessing properties of `null` or `undefined`; assigning to read-only property.   | `let num = 123; num(); // TypeError`                                                                                                                                               |
+| **RangeError**     | Value is outside allowable range.                                                              | Invalid numbers to methods; creating arrays with invalid lengths; exceeding recursion limits.                         | `let arr = new Array(-5); // RangeError`                                                                                                                                           |
+| **URIError**       | Problems with `encodeURI()`, `decodeURI()`, `encodeURIComponent()`, or `decodeURIComponent()`. | Decoding malformed URI strings.                                                                                       | `decodeURIComponent('%'); // URIError`                                                                                                                                             |
+| **AggregateError** | Represents **multiple errors at once**.                                                        | `Promise.any()` fails because all promises reject; grouping multiple errors manually.                                 | `const p1 = Promise.reject("Error1"); const p2 = Promise.reject("Error2"); Promise.any([p1,p2]).catch(e => { console.log(e instanceof AggregateError); console.log(e.errors); });` |
 
 ## finally Block (Additional)
 
