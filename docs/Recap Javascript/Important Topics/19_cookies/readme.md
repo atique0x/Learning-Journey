@@ -123,15 +123,14 @@ document.cookie =
 - Use decodeURIComponent when reading cookie values to get original content.
 
 <br>
-<br>
 
-### LocalStorage & Cookies: https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/26_dom_manipulation_traversal/project/index.html
+### LocalStorage & Cookies: [Storage project live link](https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/19_cookies/project/index.html)
 
 <br>
 
 ## Example
 
-Link: https://cookies-0.netlify.app/
+Link: [Cookie project live link](https://cookies-0.netlify.app/)
 
 ```js
 const form = document.getElementById("cookieForm");
