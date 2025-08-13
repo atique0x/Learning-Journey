@@ -17,6 +17,124 @@ fetch(url, options)
 - **url** — The URL of the resource you want to fetch.
 - **options** (optional) — An object to configure the request: **HTTP method, headers, body, mode, credentials, cache**, etc.
 
+## Fetch API Options
+
+| Option        | Type                     | Default         | Purpose / Example                                                      |
+| ------------- | ------------------------ | --------------- | ---------------------------------------------------------------------- |
+| `method`      | string                   | `'GET'`         | HTTP method (`GET`, `POST`, `PUT`, `DELETE`, etc.)                     |
+| `headers`     | object                   | `{}`            | HTTP headers to send (`Content-Type`, `Authorization`, etc.)           |
+| `body`        | string / FormData / Blob | `null`          | Request body for methods like `POST` or `PUT`                          |
+| `mode`        | string                   | `'cors'`        | `'cors'`, `'no-cors'`, `'same-origin'` — affects cross-origin requests |
+| `credentials` | string                   | `'same-origin'` | `'include'`, `'omit'`, `'same-origin'` — controls cookies/auth headers |
+
+---
+
+## Origin and Same-Origin Policy (SOP)
+
+An **origin** is a combination of: protocol + host + port
+
+**Example:** `https://example.com:443`
+
+- Origins are important because of the **Same-Origin Policy (SOP)**, which restricts scripts on one origin from accessing data on another.
+
+**Examples:**
+
+| URL                        | Origin                              |
+| -------------------------- | ----------------------------------- |
+| `https://example.com`      | `https://example.com`               |
+| `https://example.com:8080` | Different origin (port differs)     |
+| `http://example.com`       | Different origin (protocol differs) |
+
+---
+
+## Same-Site vs Cross-Site Requests
+
+- **Same-Site:** Requests initiated from a page go to the **same origin** as the page.
+- **Cross-Site:** Requests initiated from a page go to a **different origin** than the page.
+
+---
+
+## CORS (Cross-Origin Resource Sharing)
+
+CORS is a **browser security feature** that controls how resources on a web page can be requested from a **different domain (origin)** than the one that served the page.
+
+### Why CORS is needed?
+
+By default, browsers enforce the **Same-Origin Policy**, blocking requests to a different origin to protect users from malicious sites.
+
+**Example:**
+
+- Web page loaded from: `https://example.com`
+- Attempted request to: `https://api.otherdomain.com` → **blocked** unless CORS is enabled.
+
+How CORS works
+
+- The **server** specifies allowed origins via special headers.
+- Header: `Access-Control-Allow-Origin` → Browser allows request if origin matches.
+- Without proper headers → request is blocked.
+
+### Key CORS Headers
+
+| Header                             | Purpose                                                                          |
+| ---------------------------------- | -------------------------------------------------------------------------------- |
+| `Access-Control-Allow-Origin`      | Specifies which origin(s) can access the resource (`https://example.com` or `*`) |
+| `Access-Control-Allow-Methods`     | Allowed HTTP methods (`GET`, `POST`, `PUT`, `DELETE`, etc.)                      |
+| `Access-Control-Allow-Headers`     | Allowed custom headers                                                           |
+| `Access-Control-Allow-Credentials` | Whether credentials (cookies, auth headers) can be sent                          |
+| `Access-Control-Max-Age`           | How long preflight results can be cached                                         |
+
+### Simple vs Preflight Requests
+
+- **Simple requests:** `GET`, `POST` (with certain content types) → browser sends request and checks response headers.
+- **Preflight requests:** For complex requests (`PUT`, `DELETE`, custom headers) → browser sends an `OPTIONS` request first to check if allowed.
+
+### Summary
+
+- CORS allows **controlled access** to resources on different origins.
+- **Server must explicitly allow** cross-origin requests.
+- Without proper CORS headers → browser blocks access.
+
+**Key Note:**
+
+- **CORS:** You can access the response if the server allows your origin.
+- **No CORS:** Browser sends the request but **you cannot read the response**.
+
+---
+
+## Credentials in Fetch
+
+Credentials = user identification info (cookies, auth headers, etc.)
+
+- **Default behavior:** Browser **doesn’t send credentials** in cross-origin requests.
+- **To use credentials:**
+  - Client: `credentials: 'include'` in fetch
+  - Server: `Access-Control-Allow-Credentials: true`
+
+| Value         | Behavior                                        |
+| ------------- | ----------------------------------------------- |
+| `include`     | Send cookies even for cross-origin requests     |
+| `same-origin` | Send cookies only for same-origin requests      |
+| `omit`        | Do not send cookies (default for CORS requests) |
+
+---
+
+## Content-Type
+
+**Purpose:** Tells server or client what type of data is being sent or received.
+
+- Used in **request headers** (Client → Server) and **response headers** (Server → Client).
+- Ensures proper parsing and rendering of data.
+
+| Content-Type              | Use Case                    |
+| ------------------------- | --------------------------- |
+| `application/json`        | Sending/receiving JSON data |
+| `text/html`               | HTML pages                  |
+| `text/plain`              | Plain text data             |
+| `multipart/form-data`     | File uploads                |
+| `application/xml`         | XML data                    |
+| `application/javascript`  | JavaScript files            |
+| `image/png`, `image/jpeg` | Image files                 |
+
 ## Key Features of Fetch API
 
 - **Promise-based:** Simplifies handling asynchronous HTTP requests.
@@ -159,14 +277,6 @@ fetch(url)
 - The server must include proper headers (e.g., **`Access-Control-Allow-Origin`**) to allow cross-origin requests.
 - If the server doesn't allow it, the browser blocks the response.
 - Fetch respects **CORS** rules automatically.
-
-## Additional Useful Points
-
-- **AbortController:** You can cancel a fetch request using AbortController.
-- **Timeouts:** Fetch doesn't have built-in timeouts; you can implement it with AbortController or custom logic.
-- **Credentials:** Use **`credentials: 'include'`** in options to send cookies with cross-origin requests.
-- **Streaming:** You can consume large responses in chunks via **ReadableStream**.
-- **Headers:** You can get/set request and response headers via the **Headers interface**.
 
 ## Summary
 
