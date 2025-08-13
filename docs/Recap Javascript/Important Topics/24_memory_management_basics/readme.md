@@ -21,6 +21,18 @@ The JavaScript Engine uses **Automatic Garbage Collection (GC)** to manage memor
 - **Stack** → Fast, fixed-size storage for primitives (`number`, `string`, `boolean`, `null`, `undefined`, `symbol`, `bigint`) and references to objects.
 - **Heap** → Flexible, dynamic storage for non-primitives (objects, arrays, functions, DOM nodes).
 
+## Heap vs Stack
+
+| Feature                | Stack                                            | Heap                                         |
+| ---------------------- | ------------------------------------------------ | -------------------------------------------- |
+| **Storage**            | Primitives (`number`, `string`, `boolean`, etc.) | Objects, Arrays, Functions (reference types) |
+| **Access Speed**       | Very fast                                        | Slower than stack                            |
+| **Memory Size**        | Small, fixed                                     | Large, dynamic                               |
+| **Lifetime**           | Exists only during function execution            | Exists as long as there are references       |
+| **Memory Management**  | Automatic (LIFO, removed when function ends)     | Garbage Collector manages unused objects     |
+| **Reference Handling** | Values stored directly                           | Variables store reference (pointer) to heap  |
+| **Use Case**           | Temporary data, function calls, recursion        | Complex data structures, shared objects      |
+
 <br>
 
 ## 3. Memory Life Cycle in JS
