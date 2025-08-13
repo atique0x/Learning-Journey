@@ -39,31 +39,61 @@ console.log(mergedObj);
 // { a: 100, b: 20, c: 30, d: 40 }
 
 const users1 = [
-    { id: 1, name: "Alice" },
-    { id: 2, name: "Bob" },
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" },
 ];
 const users2 = [
-    { id: 2, name: "Bobby" },
-    { id: 3, name: "Charlie" },
+  { id: 2, name: "Bobby" },
+  { id: 3, name: "Charlie" },
 ];
 
 const mergeUser = [...users1, ...users2];
 console.log(mergeUser);
 
 const mergeUniqueUser = [
-    ...users1,
-    ...users2.filter((u2) => !users1.find((u1) => u1.id == u2.id)),
+  ...users1,
+  ...users2.filter((u2) => !users1.find((u1) => u1.id == u2.id)),
 ];
 console.log(mergeUniqueUser);
 /*
 
 
 
+*/
+const person = {
+  name: "Alice",
+  age: 28,
+  profession: "Engineer",
+  city: "Dhaka",
+  isMarried: false,
+};
+
+const car = {
+  brand: "Toyota",
+  model: "Corolla",
+  year: 2021,
+  color: "Blue",
+  isElectric: false,
+};
+
+// const newObj = { ...person, car.color }; //❌ This is wrong
+// const newObj = {
+//   ...person,
+//   carColor: car.color, // Possible but change attribute name
+// };
+
+const { color, brand } = car; // pick multiple keys
+const newObj = { ...person, color, brand }; // Possible
+
+console.log("New Object: ", newObj);
+/*
+
+
 
 */
 // Rest in Function Parameters
 function sum(...numbers) {
-    return numbers.reduce((acc, curr) => acc + curr, 0);
+  return numbers.reduce((acc, curr) => acc + curr, 0);
 }
 
 console.log(sum(1, 2, 3)); // 6

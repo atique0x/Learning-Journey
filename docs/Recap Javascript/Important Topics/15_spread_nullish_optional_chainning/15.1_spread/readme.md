@@ -6,10 +6,10 @@ The Spread operator allows you to expand an iterable (like an array or object) i
 
 ## Use Cases
 
--   Expanding arrays
--   Copying arrays/objects
--   Merging arrays/objects
--   Passing elements as function arguments
+- Expanding arrays
+- Copying arrays/objects
+- Merging arrays/objects
+- Passing elements as function arguments
 
 ---
 
@@ -51,6 +51,35 @@ console.log(obj2); // { a: 1, b: 2, c: 3 }
 ```
 
 ```js
+const person = {
+  name: "Alice",
+  age: 28,
+  profession: "Engineer",
+  city: "Dhaka",
+  isMarried: false,
+};
+
+const car = {
+  brand: "Toyota",
+  model: "Corolla",
+  year: 2021,
+  color: "Blue",
+  isElectric: false,
+};
+
+// const newObj = { ...person, car.color }; //❌ This is wrong
+// const newObj = {
+//   ...person,
+//   carColor: car.color, // Possible but change attribute name
+// };
+
+const { color, brand } = car; // pick multiple keys
+const newObj = { ...person, color, brand }; // Possible
+
+console.log("New Object: ", newObj);
+```
+
+```js
 const defaultSettings = { theme: "light", notifications: true };
 const userSettings = { notifications: false };
 
@@ -72,12 +101,12 @@ console.log(mergedObj);
 
 ```js
 const users1 = [
-    { id: 1, name: "Alice" },
-    { id: 2, name: "Bob" },
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" },
 ];
 const users2 = [
-    { id: 2, name: "Bobby" },
-    { id: 3, name: "Charlie" },
+  { id: 2, name: "Bobby" },
+  { id: 3, name: "Charlie" },
 ];
 
 const mergeUser = [...users1, ...users2];
@@ -86,8 +115,8 @@ console.log(mergeUser);
 
 ```js
 const mergeUniqueUser = [
-    ...users1,
-    ...users2.filter((u2) => !users1.find((u1) => u1.id == u2.id)),
+  ...users1,
+  ...users2.filter((u2) => !users1.find((u1) => u1.id == u2.id)),
 ];
 console.log(mergeUniqueUser);
 ```
@@ -99,12 +128,12 @@ console.log(mergeUniqueUser);
 
 The **Rest operator** collects multiple elements and condenses them into a single array or object.
 
--   It is the opposite of the spread operator (`...`), which expands elements.
+- It is the opposite of the spread operator (`...`), which expands elements.
 
 ## Usage
 
--   Primarily used in **function parameters** to gather remaining arguments into an array.
--   Used in **destructuring** to collect the rest of the elements or properties into a new array or object.
+- Primarily used in **function parameters** to gather remaining arguments into an array.
+- Used in **destructuring** to collect the rest of the elements or properties into a new array or object.
 
 ---
 
@@ -112,7 +141,7 @@ The **Rest operator** collects multiple elements and condenses them into a singl
 
 ```js
 function sum(...numbers) {
-    return numbers.reduce((acc, curr) => acc + curr, 0);
+  return numbers.reduce((acc, curr) => acc + curr, 0);
 }
 
 console.log(sum(1, 2, 3)); // 6
