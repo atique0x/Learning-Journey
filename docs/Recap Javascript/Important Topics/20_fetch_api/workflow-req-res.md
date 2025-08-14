@@ -146,3 +146,25 @@ Content-Type: application/json
 ```
 
 - Browser allows JS to read response.
+
+<br><br>
+
+## HTTP Methods
+
+| Method     | Purpose                                                        |
+| ---------- | -------------------------------------------------------------- |
+| **GET**    | Retrieve data from a server                                    |
+| **POST**   | Create a new resource on the server                            |
+| **PUT**    | Replace a resource completely or create it if it doesn’t exist |
+| **PATCH**  | Update part of a resource                                      |
+| **DELETE** | Delete a resource from the server                              |
+
+<br>
+
+## Key differences between `POST` and `PUT`
+
+| Feature                     | POST                       | PUT                                 |
+| --------------------------- | -------------------------- | ----------------------------------- |
+| ID generation               | Server generates unique ID | Client specifies ID                 |
+| Multiple identical requests | Creates multiple resources | Overwrites same resource            |
+| Typical usage               | Create new resource        | Update or replace existing resource |
