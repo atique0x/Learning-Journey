@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button onclick="checkEvent(event)">Check Event</button>
+    <form action="" onsubmit="formSubmit(event)">
+        <input type="submit" value="Submit">
+        <input type="submit" value="Remove">
+    </form>
+
+
+    <script>
+        function checkEvent(e) {
+            console.log(e.button);
+        }
+        function formSubmit(e) {
+            e.preventDefault()
+            console.log(e.submitter);
+        }
+    </script>
+</body>
+
+</html>

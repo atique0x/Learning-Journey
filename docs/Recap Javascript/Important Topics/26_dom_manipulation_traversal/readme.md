@@ -200,3 +200,14 @@ DOM traversal means navigating between nodes (elements) in the DOM tree.
   console.log(nextElement);
   // Logs: <div>Div-2</div> — the element immediately after the <ul id="list">
   ```
+
+### Event Property
+
+| Method / Property     | Description                                                   |
+| --------------------- | ------------------------------------------------------------- |
+| `e.preventDefault()`  | Prevents the browser’s default action (like form submission). |
+| `e.stopPropagation()` | Stops the event from bubbling up to parent elements.          |
+| `e.target`            | The element that triggered the event.                         |
+| `e.timeStamp`         | Timestamp of when the event occurred.                         |
+| `e.target.value`      | Current value of the input/textarea/select element.           |
+| `e.submitter`         | Used in forms with multiple submit buttons.                   |
