@@ -48,9 +48,8 @@ greet: function () {} // ❌ will be removed
 - JSON keys **must be strings wrapped in double quotes** `" "`.
 - JSON strings **must use double quotes**, not single quotes.
 - Parsing invalid JSON will **throw a syntax error**.
-
-- > In arrays, undefined is replaced with null in JSON.
-- > Dates are converted to ISO 8601 string format.
+- **In arrays, undefined is replaced with null in JSON**.
+- **Dates are converted to ISO 8601 string format**.
 
 ## JSON Methods
 
