@@ -1,5 +1,7 @@
 # DOM Manipulation & Traversal
 
+### [Project Link]("https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/26_dom_manipulation_traversal/index.html)
+
 ## What is DOM?
 
 DOM (Document Object Model) is a programming interface for HTML and XML documents.  
