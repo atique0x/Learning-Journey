@@ -1,5 +1,7 @@
 # JavaScript Promise & Async-Await
 
+### Project Link: [Async-Await Project Live Link](https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/16_promise_async_await/project/index.html)
+
 ## What is a JavaScript Promise?
 
 A **Promise** is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
@@ -125,11 +127,7 @@ This pattern allows you to define how the Promise will complete based on the out
 - Use `try...catch` blocks to handle errors from awaited Promises.
 - Errors thrown inside async functions reject the returned Promise.
 
-> Async/await = Promise chains + better syntax. No exclusive functionality.
-
-<br>
-
-### Project Link: [Async-Await Project Live Link](https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/16_promise_async_await/project/index.html)
+**Async/await = Promise chains + better syntax. No exclusive functionality.**
 
 <br>
 
