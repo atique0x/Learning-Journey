@@ -1,5 +1,9 @@
 # What are Cookies?
 
+#### Link: [Cookie project live link](https://cookies-0.netlify.app/)
+
+#### LocalStorage & Cookies: [Storage project live link](https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/19_cookies/project/index.html)
+
 Cookies are small pieces of data (typically up to 4KB) stored on the user's browser.  
 They are sent automatically with every HTTP request to the server for the cookie’s domain.  
 Cookies can be set by the server via HTTP headers or by JavaScript on the client side.
@@ -10,7 +14,7 @@ Cookies can be set by the server via HTTP headers or by JavaScript on the client
 - Personalization
 - Tracking user activity
 
-Cookies have properties such as expiration date, path, domain, Secure flag, HttpOnly, and SameSite policy.
+**Cookies have properties such as expiration date, path, domain, Secure flag, HttpOnly, and SameSite policy.**
 
 ## Syntax
 
@@ -78,6 +82,11 @@ document.cookie =
 
 - **Deleting a Cookie:**
   Set the cookie with an expiration date in the past to remove it.
+
+  ```js
+  document.cookie = "cookieName=; Max-Age=0; path=/";
+  ```
+
   ```js
   function deleteCookie(name) {
     document.cookie =
@@ -104,7 +113,7 @@ document.cookie =
 
 | Flag     | Purpose                                        | How to Use                                | Notes & Details                                                                     |
 | -------- | ---------------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------------------------- |
-| Secure   | Send cookie only over HTTPS                    | `name=value; Secure`                      | Protects cookie from being sent over insecure HTTP. Requires HTTPS.                 |
+| Secure   | Send cookie only over HTTPS                    | `name=value; Secure`                      | Sent only over HTTPS. Prevents sending over plain HTTP                              |
 | HttpOnly | Prevent JavaScript access                      | Server-side only: `name=value; HttpOnly`  | Protects against XSS by hiding cookie from `document.cookie`. Cannot be set via JS. |
 | SameSite | Controls cookie sending on cross-site requests | `Set-Cookie: name=value; SameSite=Strict` | Controls cross-site behavior to prevent CSRF attacks.                               |
 
@@ -119,108 +128,8 @@ document.cookie =
 ## Extra
 
 - Use encodeURIComponent when setting cookie values with special characters.
-
 - Use decodeURIComponent when reading cookie values to get original content.
 
-<br>
-
-### LocalStorage & Cookies: [Storage project live link](https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/19_cookies/project/index.html)
-
-<br>
-
-## Example
-
-Link: [Cookie project live link](https://cookies-0.netlify.app/)
-
-```js
-const form = document.getElementById("cookieForm");
-
-const cookiesTableBody = document.querySelector("#cookiesTable tbody");
-
-function setCookie(name, value, days) {
-  const expires = new Date(Date.now() + days * 864e5).toUTCString();
-  document.cookie = `${name}=${encodeURIComponent(
-    value
-  )}; expires=${expires}; path=/;`;
-}
-
-function getAllCookies() {
-  const cookies = document.cookie ? document.cookie.split("; ") : [];
-  const result = [];
-
-  for (let i = 0; i < cookies.length; i++) {
-    const parts = cookies[i].split("=");
-    const key = parts[0];
-    const value = decodeURIComponent(parts.slice(1).join("="));
-    result.push({ key, value });
-  }
-
-  return result;
-}
-
-function deleteCookie(name) {
-  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-}
-
-function renderCookies() {
-  const cookies = getAllCookies();
-  cookiesTableBody.innerHTML = "";
-
-  if (cookies.length === 0) {
-    cookiesTableBody.innerHTML =
-      '<tr><td colspan="3">No cookies found</td></tr>';
-    return;
-  }
-
-  cookies.forEach(({ key, value }) => {
-    const tr = document.createElement("tr");
-
-    const tdKey = document.createElement("td");
-    tdKey.textContent = key;
-
-    const tdValue = document.createElement("td");
-    tdValue.textContent = value;
-
-    const tdAction = document.createElement("td");
-    const delBtn = document.createElement("button");
-
-    delBtn.textContent = "Delete";
-    delBtn.className = "deleteBtn";
-
-    delBtn.onclick = () => {
-      deleteCookie(key);
-      alert(`Cookie "${key}" deleted`);
-      renderCookies();
-    };
-
-    tdAction.appendChild(delBtn);
-
-    tr.appendChild(tdKey);
-    tr.appendChild(tdValue);
-    tr.appendChild(tdAction);
-
-    cookiesTableBody.appendChild(tr);
-  });
-}
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const key = document.getElementById("cookieKey").value.trim();
-  const value = document.getElementById("cookieValue").value.trim();
-  if (key && value) {
-    setCookie(key, value, 7);
-    alert(`Cookie "${key}" set with value "${value}"`);
-    form.reset();
-    renderCookies();
-  }
-});
-
-window.onload = () => {
-  renderCookies();
-};
-```
-
-<br>
 <br>
 
 # Comparison Table
