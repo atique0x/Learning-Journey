@@ -318,6 +318,21 @@ e: 2
 ### Optimize Loops
 
 - Use simple `for` loops or `for...of` for arrays.
-- Avoid nested loops when possible (O(n²) complexity).
+- Avoid nested loops when possible (O(n²) complexity). [By hashing table]
+
+```js
+const arr1 = [1, 2, 3, 4];
+const arr2 = [3, 4, 5, 6];
+
+// Nested loop approach (O(n²))
+const duplicates = arr1.filter((x) => arr2.includes(x));
+//arr1.filter() → O(n)
+//arr2.includes() for each → O(m)
+//Total: O(n*m) → same as nested loop in worst case.
+
+// Create a Set or Map from arr2 for O(1) lookups
+const set2 = new Set(arr2);
+const duplicates = arr1.filter((x) => set2.has(x));
+```
 
 ---
