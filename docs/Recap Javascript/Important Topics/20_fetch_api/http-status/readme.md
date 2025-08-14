@@ -1,5 +1,9 @@
 # HTTP Status
 
+### [Project Link](https://atique0x.github.io/Learning-Journey/Recap%20Javascript/Important%20Topics/20_fetch_api/http-status/index.html)
+
+### HTTP Important Status Meaning
+
 | Code | Category     | Meaning               | Usage / Notes                                       |
 | ---- | ------------ | --------------------- | --------------------------------------------------- |
 | 200  | Success      | OK                    | Standard success for GET/POST requests.             |

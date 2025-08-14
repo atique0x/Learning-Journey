@@ -1,5 +1,7 @@
 # Fetch API: Overview
 
+#### Link: [Fetch API project live link](https://fetch-apis0.netlify.app/)
+
 The **Fetch API** is a modern, **promise-based** JavaScript interface for making HTTP requests (GET, POST, PUT, DELETE, etc.) from the browser. It provides a simpler, cleaner, and more powerful alternative to the older XMLHttpRequest method.
 
 ## Syntax
@@ -131,9 +133,9 @@ Credentials = user identification info (cookies, auth headers, etc.)
 | `text/html`               | HTML pages                  |
 | `text/plain`              | Plain text data             |
 | `multipart/form-data`     | File uploads                |
-| `application/xml`         | XML data                    |
-| `application/javascript`  | JavaScript files            |
 | `image/png`, `image/jpeg` | Image files                 |
+
+### [🔗 CORS WORKFLOW NOTE](https://github.com/atique0x/Learning-Journey/tree/main/docs/Recap%20Javascript/Important%20Topics/20_fetch_api/workflow-req-res.md)
 
 ## Key Features of Fetch API
 
@@ -287,85 +289,3 @@ fetch(url)
 - Works seamlessly with **async/await**.
 - Handles **CORS** according to browser and server policies.
 - Provides flexibility and power for network requests in web apps.
-
-<br>
-
-# Example
-
-Link: https://fetch-apis0.netlify.app/
-
-```js
-const apiUrl = "https://jsonplaceholder.typicode.com/users";
-const statusDiv = document.getElementById("status");
-const usersTable = document.getElementById("usersTable");
-const tbody = usersTable.querySelector("tbody");
-const errorMsg = document.getElementById("errorMsg");
-
-async function loadUsers() {
-  try {
-    statusDiv.textContent = "Loading users...";
-    errorMsg.textContent = "";
-    usersTable.style.display = "none";
-
-    const res = await fetch(apiUrl);
-    if (!res.ok) throw new Error("Failed to fetch users");
-
-    const users = await res.json();
-
-    tbody.innerHTML = "";
-
-    users.forEach((user) => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-          <td>${user.id}</td>
-          <td>${user.name}</td>
-          <td>${user.email}</td>
-        `;
-      tbody.appendChild(tr);
-    });
-
-    statusDiv.textContent = "";
-    usersTable.style.display = "table";
-  } catch (err) {
-    statusDiv.textContent = "";
-    errorMsg.textContent = err.message;
-  }
-}
-
-async function userForm(e) {
-  e.preventDefault();
-  errorMsg.textContent = "";
-  statusDiv.textContent = "Adding user...";
-  const newUser = {
-    name: e.target.name.value.trim(),
-    email: e.target.email.value.trim(),
-  };
-
-  try {
-    const res = await fetch(apiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newUser),
-    });
-
-    if (!res.ok) throw new Error("Failed to add user");
-
-    const createdUser = await res.json();
-
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-        <td>${createdUser.id}</td>
-        <td>${createdUser.name}</td>
-        <td>${createdUser.email}</td>
-      `;
-    tbody.appendChild(tr);
-
-    statusDiv.textContent = "User added successfully!";
-
-    setTimeout(() => (statusDiv.textContent = ""), 3000);
-  } catch (err) {
-    statusDiv.textContent = "";
-    errorMsg.textContent = err.message;
-  }
-}
-```

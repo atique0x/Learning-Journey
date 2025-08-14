@@ -44,6 +44,18 @@ userForm.addEventListener("submit", (e) => {
 
   const formData = new FormData(userForm); // Use userForm here
 
+  fetch("https://jsonplaceholder.typicode.com/users", {
+    method: "POST",
+    body: formData,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data) {
+        alert("Data Posted");
+      }
+    })
+    .catch((err) => console.log(err));
+
   const name = formData.get("name");
   const age = formData.get("age");
   const email = formData.get("email");
