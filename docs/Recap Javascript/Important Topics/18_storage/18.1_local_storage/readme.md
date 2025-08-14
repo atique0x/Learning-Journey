@@ -1,12 +1,14 @@
 # Local Storage
 
+### Link: [Local Storage Project](https://local-storage-000.netlify.app/)
+
 Local Storage is a feature of the **Web Storage API** that provides persistent, key-value storage in the browser.
 
 ## Key Characteristics
 
 - Persistent: Data **does not expire until explicitly deleted**.
 - Capacity: Stores approximately **5–10 MB** of data per domain (varies by browser).
-- Storage Format: Data is stored as **strings** (objects and arrays can be stored by converting to JSON).
+- Storage Format: **Data is stored as strings (objects and arrays can be stored by converting to JSON).**
 - Privacy: Data is **not sent to the server** with every HTTP request.
 - Scope: Data is stored **per origin** (protocol + domain + port).
 - Access: Managed via the JavaScript `localStorage` object.
@@ -64,8 +66,6 @@ Local Storage is ideal for storing data locally in the user's browser that shoul
 - Data persists even after closing and reopening the browser or tab.
 
 # Example
-
-### Link: [Local Storage Project](https://local-storage-000.netlify.app/)
 
 ```js
 const form = document.getElementById("userForm");
