@@ -118,23 +118,36 @@ const calendarContainer = document.getElementById("calendar");
 for (let i = 0; i < calendarDates.length; i++) {
   const date = calendarDates[i];
   const button = document.createElement("button");
+  const today = new Date().getDate();
+
+  if (date.value < today) {
+    date.isAvailable = "unavailable";
+    localStorage.setItem("dates", JSON.stringify(calendarDates));
+  }
 
   const buttonUI = () => {
     button.id = date.id;
     button.className = `p-2 border border-gray-200 rounded ${
-      date.isAvailable
+      date.isAvailable === "unavailable"
+        ? "bg-gray-400 text-white cursor-not-allowed"
+        : date.isAvailable
         ? "cursor-pointer"
         : "bg-gray-400 text-white cursor-not-allowed"
     }`;
 
-    button.innerText = `${date.value} ${
-      date.isAvailable ? "Available" : "Booked"
+    button.innerHTML = `${date.value} <br> ${
+      date.isAvailable === "unavailable"
+        ? "Not Available"
+        : date.isAvailable
+        ? "Available"
+        : "Booked"
     }`;
   };
   buttonUI();
 
   button.addEventListener("click", () => {
     const username = getCookie("username");
+
     console.log(username);
     if (date.isAvailable === true) {
       const isBooked = prompt("If you want to book, write yes").toLowerCase();
@@ -152,3 +165,5 @@ for (let i = 0; i < calendarDates.length; i++) {
   });
   calendarContainer.appendChild(button);
 }
+
+// console.log(today);
