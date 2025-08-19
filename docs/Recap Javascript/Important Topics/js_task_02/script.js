@@ -5,35 +5,10 @@ const loggedUsers = [
   { username: "rafid", password: "1234" },
   { username: "tamim", password: "1234" },
 ];
-//Set userdata to local storage
 localStorage.setItem("users", JSON.stringify(loggedUsers));
 
-//get userdata from local storage
-const getUserData = () => {
-  return JSON.parse(localStorage.getItem("users"));
-};
+const getUserData = () => JSON.parse(localStorage.getItem("users"));
 
-let calendarDates = JSON.parse(localStorage.getItem("dates"));
-
-if (!calendarDates) {
-  calendarDates = [];
-  for (let day = 1; day <= 28; day++) {
-    calendarDates.push({
-      id: `day-${day}`,
-      value: `${day}`,
-      isAvailable: true,
-    });
-  }
-  localStorage.setItem("dates", JSON.stringify(calendarDates));
-}
-
-//
-const form = document.getElementById("loginForm");
-const logoutBtn = document.getElementById("logout");
-const loginBtn = document.getElementById("login");
-const fullCalender = document.getElementById("fullcalender");
-
-//set cookie stay 30 min
 const setCookie = (username) => {
   document.cookie = `username=${username}; max-age=1800; path=/`;
 };
@@ -43,25 +18,22 @@ const getCookie = (name) => {
   for (let cookie of cookies) {
     cookie = cookie.trim();
     const [key, value] = cookie.split("=");
-    if (key === name) {
-      return value;
-    }
+    if (key === name) return value;
   }
   return null;
 };
 
 const removeCookie = () => {
-  document.cookie = `username=; max-age=0; path=/`;
+  document.cookie = "username=; max-age=0; path=/";
 };
 
-const dateBook = () => {};
+let booked = JSON.parse(localStorage.getItem("booked")) || [];
 
-const setBookedInfoIntoStorage = (user, dateId) => {
-  const newBooked = JSON.parse(localStorage.getItem("bookedData")) || [];
-  newBooked.push({ user, dateId });
-
-  localStorage.setItem("bookedData", JSON.stringify(newBooked));
-};
+const form = document.getElementById("loginForm");
+const logoutBtn = document.getElementById("logout");
+const loginBtn = document.getElementById("login");
+const fullCalender = document.getElementById("fullcalender");
+const confirmBook = document.getElementById("confirm-book");
 
 const updateUI = () => {
   const username = getCookie("username");
@@ -75,95 +47,147 @@ const updateUI = () => {
     loginBtn.removeAttribute("hidden");
   }
 };
+updateUI();
 
-//Logout user
 logoutBtn.addEventListener("click", () => {
   removeCookie();
   alert("User logged out successfully");
   updateUI();
 });
 
-//Submit user info
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
   const username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value.trim();
   const users = getUserData();
-  console.log(users);
 
-  const user = users.find((user) => user.username === username);
+  const user = users.find((u) => u.username === username);
+  if (!user) return alert("User not defined");
+  if (user.password !== password) return alert("Password doesn't match");
 
-  if (user) {
-    if (user.password === password) {
-      console.log("Username:", username);
-      console.log("Password:", password);
-
-      setCookie(username);
-
-      updateUI();
-      alert("Logged in successfully");
-    } else {
-      alert("Password doesn't match");
-    }
-  } else {
-    alert("User not defiend");
-  }
+  setCookie(username);
+  updateUI();
+  alert("Logged in successfully");
   form.reset();
 });
 
-updateUI();
+function showCalender() {
+  const { Calendar } = window.VanillaCalendarPro;
 
-const calendarContainer = document.getElementById("calendar");
+  const options = {
+    onCreateDateEls(self, dateEl) {
+      const isWeekend = dateEl.getAttribute("data-vc-date-weekend");
+      const btn = dateEl.querySelector("button");
+      btn.classList.add(
+        "flex",
+        "flex-col",
+        "gap-2",
+        "!p-2",
+        "!border",
+        "!font-bold"
+      );
 
-for (let i = 0; i < calendarDates.length; i++) {
-  const date = calendarDates[i];
-  const button = document.createElement("button");
-  const today = new Date().getDate();
+      const dateStr = dateEl.getAttribute("data-vc-date");
+      const dateTime = new Date(dateStr).getTime();
+      const today = new Date().getTime() - 24 * 60 * 60 * 1000;
 
-  if (date.value < today) {
-    date.isAvailable = "unavailable";
-    localStorage.setItem("dates", JSON.stringify(calendarDates));
-  }
+      const span = document.createElement("span");
+      btn.appendChild(span);
 
-  const buttonUI = () => {
-    button.id = date.id;
-    button.className = `p-2 border border-gray-200 rounded ${
-      date.isAvailable === "unavailable"
-        ? "bg-gray-400 text-white cursor-not-allowed"
-        : date.isAvailable
-        ? "cursor-pointer"
-        : "bg-gray-400 text-white cursor-not-allowed"
-    }`;
-
-    button.innerHTML = `${date.value} <br> ${
-      date.isAvailable === "unavailable"
-        ? "Not Available"
-        : date.isAvailable
-        ? "Available"
-        : "Booked"
-    }`;
-  };
-  buttonUI();
-
-  button.addEventListener("click", () => {
-    const username = getCookie("username");
-
-    console.log(username);
-    if (date.isAvailable === true) {
-      const isBooked = prompt("If you want to book, write yes").toLowerCase();
-      if (isBooked === "yes") {
-        date.isAvailable = false;
-        localStorage.setItem("dates", JSON.stringify(calendarDates));
-        setBookedInfoIntoStorage(username, date.id);
-        buttonUI();
+      if (isWeekend === "") {
+        btn.disabled = true;
+        btn.classList.add("!bg-gray-400", "!text-white", "!cursor-not-allowed");
+        span.innerText = "Weekend";
+      } else if (dateTime < today) {
+        btn.disabled = true;
+        btn.classList.add("!bg-red-300", "!text-white", "!cursor-not-allowed");
+        span.innerText = "Not Available";
       } else {
-        alert("No booked select");
+        const username = getCookie("username");
+        const findBooked = booked.find((b) => b.date === dateStr);
+        if (findBooked) {
+          if (findBooked.isBooked === "pending") {
+            span.innerText = "Pending";
+            btn.disabled = true;
+            btn.classList.add("!bg-orange-400", "!cursor-not-allowed");
+          } else if (findBooked.isBooked === "booked") {
+            span.innerText = "Booked";
+            btn.disabled = true;
+            btn.classList.add(
+              "!bg-green-500",
+              "!text-white",
+              "!cursor-not-allowed"
+            );
+          }
+        } else {
+          span.innerText = "Available";
+          btn.addEventListener("click", () => {
+            if (booked.find((b) => b.currentUser === username)) {
+              return alert("You already submitted a booking");
+            }
+
+            booked.push({
+              currentUser: username,
+              date: dateStr,
+              isBooked: "pending",
+            });
+            localStorage.setItem("booked", JSON.stringify(booked));
+
+            span.innerText = "Pending";
+            btn.disabled = true;
+            btn.classList.add("!bg-orange-400", "!cursor-not-allowed");
+
+            showConfirmation(username, dateStr);
+          });
+        }
       }
-    } else {
-      alert("Already booked");
-    }
-  });
-  calendarContainer.appendChild(button);
+    },
+  };
+
+  const calendar = new Calendar("#calendar", options);
+  calendar.init();
 }
 
-// console.log(today);
+function showConfirmation(username, date) {
+  confirmBook.innerHTML = "";
+
+  const div = document.createElement("div");
+  div.innerHTML = `Username: <b>${username}</b><br>Date: <b>${date}</b><br>Status: Pending`;
+
+  const button = document.createElement("button");
+  button.innerText = "Confirm Booking";
+  button.classList.add("p-2", "mt-2", "bg-blue-500", "text-white", "rounded");
+
+  const timeoutId = setTimeout(() => {
+    booked = booked.filter(
+      (b) =>
+        !(
+          b.currentUser === username &&
+          b.date === date &&
+          b.isBooked === "pending"
+        )
+    );
+    localStorage.setItem("booked", JSON.stringify(booked));
+    confirmBook.setAttribute("hidden", "hidden");
+  }, 10000);
+
+  button.addEventListener("click", () => {
+    clearTimeout(timeoutId);
+    const booking = booked.find(
+      (b) => b.currentUser === username && b.date === date
+    );
+    if (booking) {
+      booking.isBooked = "booked";
+      localStorage.setItem("booked", JSON.stringify(booked));
+      alert("Booking confirmed!");
+      confirmBook.setAttribute("hidden", "hidden");
+      showCalender();
+    }
+  });
+
+  confirmBook.appendChild(div);
+  confirmBook.appendChild(button);
+  confirmBook.removeAttribute("hidden");
+}
+
+showCalender();
