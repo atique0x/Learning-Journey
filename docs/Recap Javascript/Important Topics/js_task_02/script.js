@@ -61,22 +61,16 @@ logoutBtn.addEventListener("click", () => {
     bookedInfo.splice(index, 1);
     localStorage.setItem("bookedInfo", JSON.stringify(bookedInfo));
   }
-
   removeToken();
   updateUI();
 
   alert("User logged out successfully");
 });
 
-// Login form submission
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
+//Login authentication
+function loginAuth(username, password) {
   const users = getRegisterUsers();
-
   const user = users.find((user) => user.username === username);
-
   if (user) {
     if (user.password === password) {
       setToken(username);
@@ -90,6 +84,14 @@ form.addEventListener("submit", (event) => {
   } else {
     alert("You are currently not registered");
   }
+}
+
+// Login form submission
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  loginAuth(username, password);
   form.reset();
 });
 
@@ -108,7 +110,6 @@ const setBookings = (date) => {
     alert("You have a pending booking");
     return;
   }
-
   const newBook = {
     user: currentUser,
     date: date,
@@ -126,69 +127,58 @@ function showCalender() {
   const { Calendar } = window.VanillaCalendarPro;
 
   const options = {
+    displayDatesOutside: false,
+    disableDatesPast: true,
+
     onCreateDateEls(self, dateEl) {
       const btn = dateEl.querySelector("button");
-      btn.classList.remove("vc-date__btn");
-      btn.classList.add("flex", "flex-col", "gap-2", "!h-20");
-
+      // console.log(btn);
+      if (!btn) return;
+      btn.style.background = "inherit";
+      btn.style.outline = "none";
+      btn.className = "vc-date__btn flex flex-col gap-2 !h-20 ";
       const p = document.createElement("p");
 
-      const isWeekend = dateEl.getAttribute("data-vc-date-weekend");
-      if (isWeekend !== null) {
-        // Fixed weekend detection
-        btn.disabled = true;
-        btn.classList.add("!cursor-not-allowed", "!bg-gray-400", "!text-white");
-        p.innerText = "Weekend";
+      if (dateEl.getAttribute("data-vc-date-disabled") !== null) {
+        p.innerText = "Disabled";
         btn.appendChild(p);
-        dateEl.appendChild(btn);
         return;
       }
 
       const date = dateEl.getAttribute("data-vc-date");
-      const dateTime = new Date(date).getTime();
-      const today = new Date();
-      today.setHours(0, 0, 0, 0); // start of today
 
-      if (dateTime < today.getTime()) {
-        p.innerText = "Unavailable";
+      if (dateEl.getAttribute("data-vc-date-weekend") !== null) {
         btn.disabled = true;
-        btn.classList.add("!bg-red-400", "!text-white", "!cursor-not-allowed");
+        btn.classList.add("!cursor-not-allowed", "!bg-gray-400", "!text-white");
+        p.innerText = "Weekend";
       } else {
-        p.innerText = "Available";
-
-        const checkAlreadyBooked = bookedInfo.find((b) => b.date === date);
-        if (checkAlreadyBooked) {
-          if (checkAlreadyBooked.status === "booked") {
+        const booked = bookedInfo.find((b) => b.date === date);
+        if (booked) {
+          btn.disabled = true;
+          if (booked.status === "booked") {
+            btn.classList.add(
+              "!cursor-not-allowed",
+              "!bg-green-500",
+              "!text-white"
+            );
             p.innerText = "Booked";
-            btn.disabled = true;
+          } else if (booked.status === "pending") {
             btn.classList.add(
-              "!bg-green-400",
-              "!text-white",
-              "!cursor-not-allowed"
+              "!cursor-not-allowed",
+              "!bg-orange-400",
+              "!text-white"
             );
-          } else if (checkAlreadyBooked.status === "pending") {
             p.innerText = "Pending";
-            btn.disabled = true;
-            btn.classList.add(
-              "!bg-yellow-400",
-              "!text-white",
-              "!cursor-not-allowed"
-            );
           }
-        }
-        if (!btn.disabled) {
-          btn.addEventListener("click", () => {
-            alert("Booking...");
-            setBookings(date);
-          });
+        } else {
+          p.innerText = "Available";
+          btn.disabled = false;
+          btn.addEventListener("click", () => setBookings(date));
         }
       }
-
       btn.appendChild(p);
-      dateEl.appendChild(btn);
     },
   };
-
   new Calendar("#calendar", options).init();
 }
 
@@ -211,6 +201,7 @@ const finalBooked = () => {
   <div>
     <p class="text-gray-800 font-semibold">Username: ${checkBooked.user}</p>
     <p class="text-gray-600">Status: ${checkBooked.status}</p>
+    <p class="text-gray-800 font-semibold">Booking Date: ${checkBooked.date}</p>
     <p id="timer" class="text-red-500 font-bold"></p>
   </div>
 `;
