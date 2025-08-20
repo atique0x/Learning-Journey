@@ -16,6 +16,7 @@ const logoutBtn = document.getElementById("logout");
 const loginBtn = document.getElementById("login");
 const fullCalender = document.getElementById("calender-div");
 const confirmBook = document.getElementById("confirm-book");
+const showBookedList = document.getElementById("show-booked-list");
 
 // Cookie management
 const setToken = (username) => {
@@ -42,11 +43,13 @@ const updateUI = () => {
     logoutBtn.removeAttribute("hidden");
     loginBtn.setAttribute("hidden", "hidden");
     fullCalender.removeAttribute("hidden");
+    showBookedList.removeAttribute("hidden");
   } else {
     logoutBtn.setAttribute("hidden", "hidden");
     loginBtn.removeAttribute("hidden");
     fullCalender.setAttribute("hidden", "hidden");
     confirmBook.setAttribute("hidden", "hidden");
+    showBookedList.setAttribute("hidden", "hidden");
   }
 };
 
@@ -120,6 +123,7 @@ const setBookings = (date) => {
   localStorage.setItem("bookedInfo", JSON.stringify(bookedInfo));
   showCalender();
   finalBooked();
+  showBookingList();
 };
 
 // Calendar rendering
@@ -215,6 +219,7 @@ const finalBooked = () => {
     checkBooked.status = "booked";
     localStorage.setItem("bookedInfo", JSON.stringify(bookedInfo));
     showCalender();
+    showBookingList();
     confirmBook.setAttribute("hidden", "hidden");
     clearInterval(interval);
     alert("Booking complete");
@@ -239,3 +244,41 @@ const finalBooked = () => {
   confirmBook.appendChild(button);
 };
 finalBooked();
+
+function showBookingList() {
+  showBookedList.innerHTML = "";
+  const username = getToken("username");
+  const bookedByUser = bookedInfo.filter(
+    (b) => b.user === username && b.status === "booked"
+  );
+  const h = document.createElement("h2");
+  h.innerText = "Previously Booked List";
+  h.classList.add("text-2xl", "font-bold", "mb-6", "text-gray-800");
+  showBookedList.appendChild(h);
+
+  if (bookedByUser.length === 0) {
+    const emptyMsg = document.createElement("p");
+    emptyMsg.innerText = "No bookings found.";
+    emptyMsg.classList.add("text-gray-500", "italic");
+    showBookedList.appendChild(emptyMsg);
+    return;
+  }
+
+  bookedByUser.forEach((book) => {
+    const div = document.createElement("div");
+    div.classList.add("flex", "bg-white", "p-4", "mb-2", "gap-6");
+
+    const dateP = document.createElement("p");
+    dateP.innerText = `Booked Date: ${book.date}`;
+
+    const createdAtP = document.createElement("p");
+    const createdDate = new Date(book.createdAt);
+    createdAtP.innerText = `Created: ${createdDate.toDateString()}`;
+    createdAtP.classList.add("text-gray-500", "text-sm");
+
+    div.append(dateP, createdAtP);
+    showBookedList.appendChild(div);
+  });
+  console.log(bookedByUser);
+}
+showBookingList();
