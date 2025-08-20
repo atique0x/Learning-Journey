@@ -11,20 +11,7 @@ const user: [string, number, boolean] = ["Atique", 25, true];
 
 ---
 
-## 2. Features
-
-| Feature            | Description                                                       |
-| ------------------ | ----------------------------------------------------------------- |
-| Fixed types        | Each element has a specific type based on its position.           |
-| Fixed length       | Number of elements is defined at declaration.                     |
-| Index-based access | Access elements using indices, e.g., user[0].                     |
-| Destructuring      | You can destructure tuples like arrays: const [name, age] = user. |
-| Optional elements  | Only allowed at the end: [number, number?].                       |
-| Readonly tuples    | Use readonly to prevent modification: readonly [string, number].  |
-
----
-
-3. Examples
+### Examples
 
 **Example 1 – Basic Tuple**
 
@@ -59,3 +46,18 @@ const point: [number, number?] = [10]; // ✅ valid
 const point2: [number, number?] = [10, 20]; // ✅ valid
 // const point3: [number, number?, number] = [10, 20]; // ❌ invalid
 ```
+
+---
+
+## Features
+
+| Feature            | Description                                                       |
+| ------------------ | ----------------------------------------------------------------- |
+| Fixed types        | Each element has a specific type based on its position.           |
+| Fixed length       | Number of elements is defined at declaration.                     |
+| Index-based access | Access elements using indices, e.g., user[0].                     |
+| Destructuring      | You can destructure tuples like arrays: const [name, age] = user. |
+| Optional elements  | Only allowed at the end: [number, number?].                       |
+| Readonly tuples    | Use readonly to prevent modification: readonly [string, number].  |
+
+---
