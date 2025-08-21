@@ -38,3 +38,19 @@ var updateAnotherTaksStatus = function (task, status) {
 };
 console.log(updateTaksStatus(task1, "done"));
 console.log(updateAnotherTaksStatus(task1, "todo"));
+var admin1 = {
+    id: 1,
+    name: "Asif",
+    age: 26,
+    address: {
+        city: {
+            name: "Mirpur",
+            postcode: 1216,
+        },
+        house: {},
+    },
+    role: {
+        role_id: 1,
+        name: "Admin",
+    },
+};

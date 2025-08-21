@@ -117,8 +117,8 @@ let isAdmin: boolean = false;
 
 ## `Null and Undefiend`
 
-- undefined → A variable has been declared but not assigned a value.
-- null → A variable is explicitly assigned "no value".
+- `undefined` → A variable has been declared but not assigned a value.
+- `null` → A variable is explicitly assigned "no value".
 
 ```ts
 let a; // type: any, value: undefined
@@ -127,15 +127,15 @@ let b: null = null; // value: null
 
 ### Comparison
 
-- null == undefined → true (loose equality, values considered equal).
+- `null == undefined` → true (loose equality, values considered equal).
 
-- null === undefined → false (strict equality, types different).
+- `null === undefined` → false (strict equality, types different).
 
 ### Use Cases
 
-- undefined → Usually means a value was not set yet (default/uninitialized).
+- `undefined` → Usually means a value was not set yet (default/uninitialized).
 
-- null → Explicitly indicates “empty” or “no value”.
+- `null` → Explicitly indicates “empty” or “no value”.
 
 ```ts
 function findUser(id: number): string | null {

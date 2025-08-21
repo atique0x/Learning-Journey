@@ -76,3 +76,24 @@ if (typeof value === "string") {
 | Compile-time errors    | ❌ None | ✅ Must narrow type before use |
 
 ---
+
+# Comparing any-unknown with array
+
+```ts
+let arrAny: any[] = [1, "two", true]; // array can contain any type
+
+arrAny.push({ name: "Alice" }); // ✅ no error
+//arrAny[0].toUpperCase(); // ❌ TypeScript will not catch this mistake, might cause runtime error
+
+let arrUnknown: unknown[] = [1, "two", true];
+
+arrUnknown.push({ name: "Alice" }); // ✅ allowed
+//arrUnknown[0].toUpperCase(); // ❌ Error: Object is of type 'unknown'
+
+// You must narrow the type first
+if (typeof arrUnknown[1] === "string") {
+  console.log(arrUnknown[1].toUpperCase()); // ✅ safe
+}
+```
+
+> type narrowing = type checking + telling TypeScript what the type is.

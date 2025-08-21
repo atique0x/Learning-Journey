@@ -8,7 +8,6 @@ A **Type Alias** gives a custom name to a type (primitive, union, object, array,
 - Promotes reusability of complex types
 - Ensures type safety
 - Handles nested objects, arrays, unions, and functions
-- Ideal for large projects
 
 ## Primitive & Union Type Aliases
 
@@ -126,3 +125,51 @@ console.log(updateTaksStatus(task1, "done"));
 
 console.log(updateAnotherTaksStatus(task1, "todo"));
 ```
+
+# Nested Object Type
+
+```js
+type Admin = {
+  id: number,
+  name: string,
+  age: number,
+  role: {
+    role_id: number,
+    name: "Admin",
+  },
+  address: {
+    city: {
+      name: string,
+      postcode?: number,
+    },
+    house: {
+      flatno?: number,
+      houseno?: number,
+    },
+  },
+  isActive?: boolean,
+};
+
+const admin1: Admin = {
+  id: 1,
+  name: "Asif",
+  age: 26,
+  address: {
+    city: {
+      name: "Mirpur",
+      postcode: 1216,
+    },
+    house: {},
+  },
+  role: {
+    role_id: 1,
+    name: "Admin",
+  },
+};
+```
+
+### Key Points:
+
+- `city` has a required name and an optional postcode.
+- `house` has `both properties optional` (flatno? and houseno?).
+- ✅ **Important: The house object itself is required, but its properties are optional.**

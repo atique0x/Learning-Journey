@@ -25,3 +25,11 @@ function getStatus(code) {
 }
 getStatus(200);
 var items = ["apple", 10, "banana", 25];
+function returnCheck(num, str) {
+    if (num === 1) {
+        return str.length;
+    }
+    return str.toUpperCase();
+}
+console.log(returnCheck(1, "Atique"));
+console.log(returnCheck(0, "Atique"));

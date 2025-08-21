@@ -86,3 +86,41 @@ const updateAnotherTaksStatus: updateStatus = (task, status) => {
 console.log(updateTaksStatus(task1, "done"));
 
 console.log(updateAnotherTaksStatus(task1, "todo"));
+
+type Admin = {
+  id: number;
+  name: string;
+  age: number;
+  role: {
+    role_id: number;
+    name: "Admin";
+  };
+  address: {
+    city: {
+      name: string;
+      postcode?: number;
+    };
+    house: {
+      flatno?: number;
+      houseno?: number;
+    };
+  };
+  isActive?: boolean;
+};
+
+const admin1: Admin = {
+  id: 1,
+  name: "Asif",
+  age: 26,
+  address: {
+    city: {
+      name: "Mirpur",
+      postcode: 1216,
+    },
+    house: {},
+  },
+  role: {
+    role_id: 1,
+    name: "Admin",
+  },
+};

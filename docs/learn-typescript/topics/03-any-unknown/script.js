@@ -1,48 +1,56 @@
-{
-    var user = "name";
-    // user = 2; // ❌ Error: TypeScript infers 'user' as string
-    // Example: 'any' Type
-    var variable = void 0;
-    variable = 5; // ✅ number
-    variable = "hello"; // ✅ string
-    variable = true; // ✅ boolean
-    variable = { a: 1 }; // ✅ object
-    variable = [1, 2, 3]; // ✅ array
-    // Using 'any' allows unsafe operations:
-    var something = "hello";
-    something.toUpperCase(); // ✅ works
-    something = 123;
-    // something.toUpperCase(); // ❌ Runtime error! TypeScript won’t catch this
-    // - Disables type checking
-    // - Allows method calls even if they may fail at runtime
-    // Example: 'unknown' Type (Safer)
-    var value = 10;
-    console.log(value); // ✅ prints 10
-    value = "hello";
-    // console.log(value.toUpperCase()); // ❌ Compile-time error
-    // ❗ You must narrow the type before using string methods
+var user = "name";
+// user = 2; // ❌ Error: TypeScript infers 'user' as string
+// Example: 'any' Type
+var variable;
+variable = 5; // ✅ number
+variable = "hello"; // ✅ string
+variable = true; // ✅ boolean
+variable = { a: 1 }; // ✅ object
+variable = [1, 2, 3]; // ✅ array
+// Using 'any' allows unsafe operations:
+var something = "hello";
+something.toUpperCase(); // ✅ works
+something = 123;
+// something.toUpperCase(); // ❌ Runtime error! TypeScript won’t catch this
+// - Disables type checking
+// - Allows method calls even if they may fail at runtime
+// Example: 'unknown' Type (Safer)
+var value = 10;
+console.log(value); // ✅ prints 10
+value = "hello";
+// console.log(value.toUpperCase()); // ❌ Compile-time error
+// ❗ You must narrow the type before using string methods
+if (typeof value === "string") {
+    console.log(value.toUpperCase()); // ✅ Safe
+}
+else {
+    console.log(value); // ✅ Works for other types
+}
+// 'unknown' Summary:
+// - Safer than 'any'
+// - TypeScript forces you to check the type before using it
+// Example with 'unknown'
+var checkUnknown = function (value) {
     if (typeof value === "string") {
-        console.log(value.toUpperCase()); // ✅ Safe
+        console.log("String:", value.toUpperCase());
+    }
+    else if (typeof value === "number") {
+        console.log("Number:", value * 2);
     }
     else {
-        console.log(value); // ✅ Works for other types
+        console.log("Other type:", value);
     }
-    // 'unknown' Summary:
-    // - Safer than 'any'
-    // - TypeScript forces you to check the type before using it
-    // Example with 'unknown'
-    var checkUnknown = function (value) {
-        if (typeof value === "string") {
-            console.log("String:", value.toUpperCase());
-        }
-        else if (typeof value === "number") {
-            console.log("Number:", value * 2);
-        }
-        else {
-            console.log("Other type:", value);
-        }
-    };
-    checkUnknown("hello"); // ✅ String: HELLO
-    checkUnknown(10); // ✅ Number: 20
-    checkUnknown(true); // ✅ Other type: true
+};
+checkUnknown("hello"); // ✅ String: HELLO
+checkUnknown(10); // ✅ Number: 20
+checkUnknown(true); // ✅ Other type: true
+var arrAny = [1, "two", true]; // array can contain any type
+arrAny.push({ name: "Alice" }); // ✅ no error
+//arrAny[0].toUpperCase(); // ❌ TypeScript will not catch this mistake, might cause runtime error
+var arrUnknown = [1, "two", true];
+arrUnknown.push({ name: "Alice" }); // ✅ allowed
+//arrUnknown[0].toUpperCase(); // ❌ Error: Object is of type 'unknown'
+// You must narrow the type first
+if (typeof arrUnknown[1] === "string") {
+    console.log(arrUnknown[1].toUpperCase()); // ✅ safe
 }

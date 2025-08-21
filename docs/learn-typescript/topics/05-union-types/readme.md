@@ -31,6 +31,18 @@ printId("TS123"); // ✅ string
 // printId(true);    // ❌ Error
 ```
 
+```ts
+function returnCheck(num: number, str: string): number | string {
+  if (num === 1) {
+    return str.length;
+  }
+  return str.toUpperCase();
+}
+
+console.log(returnCheck(1, "Atique"));
+console.log(returnCheck(0, "Atique"));
+```
+
 ---
 
 ## **Accessing Properties in Union Types**
