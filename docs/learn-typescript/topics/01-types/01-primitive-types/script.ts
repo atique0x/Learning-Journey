@@ -70,3 +70,31 @@ const obj = {
   name: "Atique",
 };
 console.log(obj[key1]);
+
+{
+  const num1 = 0 / 0; // NaN
+  const num2 = 1 / 0; // Infinity
+  const num3 = 0 / 1; // 0
+
+  console.log("num1: ", num1);
+  console.log("num2: ", num2);
+  console.log("num3: ", num3);
+
+  function checkValue(num: number) {
+    if (isNaN(num)) {
+      console.log("Number is NaN - ", num); //num1
+    }
+    if (!isFinite(num)) {
+      console.log("Number is Infinity - ", num); //num1,num2
+    }
+    if (isFinite(num)) {
+      console.log("Number is Finite - ", num); //num3
+    }
+    if (num === Infinity) {
+      console.log("Number is infinity"); //num2
+    }
+  }
+  checkValue(num1);
+  checkValue(num2);
+  checkValue(num3);
+}

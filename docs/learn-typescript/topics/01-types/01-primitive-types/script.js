@@ -58,3 +58,28 @@ var obj = (_a = {},
     _a.name = "Atique",
     _a);
 console.log(obj[key1]);
+{
+    var num1_1 = 0 / 0; // NaN
+    var num2_1 = 1 / 0; // Infinity
+    var num3_1 = 0 / 1; // 0
+    console.log("num1: ", num1_1);
+    console.log("num2: ", num2_1);
+    console.log("num3: ", num3_1);
+    function checkValue(num) {
+        if (isNaN(num)) {
+            console.log("Number is NaN - ", num); //num1
+        }
+        if (!isFinite(num)) {
+            console.log("Number is Infinity - ", num); //num1,num2
+        }
+        if (isFinite(num)) {
+            console.log("Number is Finite - ", num); //num3
+        }
+        if (num === Infinity) {
+            console.log("Number is infinity"); //num2
+        }
+    }
+    checkValue(num1_1);
+    checkValue(num2_1);
+    checkValue(num3_1);
+}

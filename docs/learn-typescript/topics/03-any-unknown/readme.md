@@ -77,6 +77,45 @@ if (typeof value === "string") {
 
 ---
 
+# Example any vs unknown
+
+`Any`: **We can do anything — call methods, access properties, or call it as a function. It doesn’t cause compile-time errors; issues only appear at runtime.**
+
+`Unknown`: **We cannot perform operations without proper type checking. It strictly shows errors at compile time if we try to use it directly.**
+
+`Common Point`: **In both any and unknown, we can assign or reassign any value or any type of data.**
+
+```ts
+// ---------------- ANY -----------------
+let anyData: any = 2;
+
+// You can reassign any type — number → array here ✅
+anyData = [1, 2, 3, 4];
+
+// ❌ Allowed at compile time, but will crash at runtime
+// Because arrays don't have toUpperCase()
+console.log(anyData.toUpperCase()); // ✅ Compiles | ❌ Runtime Error
+
+// ❌ Same problem: `trim()` exists on strings, not arrays
+anyData.trim(); // ✅ Compiles | ❌ Runtime Error
+
+// ❌ You can even call it as a function without error, but it will crash at runtime
+anyData(); // ✅ Compiles | ❌ Runtime Error
+
+// ---------------- UNKNOWN -----------------
+let unknownData: unknown = 2;
+
+// ❌ Cannot directly call string methods on unknown
+// TypeScript forces you to first **check the type** or **assert it**
+unknownData.toUpperCase(); // ❌ Compile-time Error
+
+// Reassigning unknown to an array ✅
+unknownData = [1, 2, 3, 4];
+
+// ❌ Again, you cannot directly call string methods on unknown
+unknownData.toUpperCase(); // ❌ Compile-time Error
+```
+
 # Comparing any-unknown with array
 
 ```ts

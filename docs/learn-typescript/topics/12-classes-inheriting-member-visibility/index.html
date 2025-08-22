@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Inheritence Practice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-6">
+
+    <div class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
+        <h1 class="text-2xl font-bold mb-4">Library Management System</h1>
+
+        <!-- Add Book Section -->
+        <div class="mb-4">
+            <input id="book-title" type="text" placeholder="Book Title" class="border p-2 rounded w-2/3">
+            <button id="add-book-btn" class="bg-blue-500 text-white px-4 py-2 rounded ml-2">Add Book</button>
+        </div>
+
+        <!-- Borrow/Return Section -->
+        <div class="mb-4">
+            <input id="member-name" type="text" placeholder="Member Name" class="border p-2 rounded w-2/5">
+            <input id="borrow-book-title" type="text" placeholder="Book Title" class="border p-2 rounded w-2/5 ml-2">
+            <button id="borrow-btn" class="bg-green-500 text-white px-4 py-2 rounded ml-2">Borrow</button>
+            <button id="return-btn" class="bg-yellow-500 text-white px-4 py-2 rounded ml-2">Return</button>
+        </div>
+
+        <!-- Book List Display -->
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold">Available Books:</h2>
+            <ul id="book-list" class="list-disc list-inside mt-2"></ul>
+        </div>
+
+        <!-- Member Borrowed Books Display -->
+        <div>
+            <h2 class="text-xl font-semibold">Member Borrowed Books:</h2>
+            <ul id="member-books" class="list-disc list-inside mt-2"></ul>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
