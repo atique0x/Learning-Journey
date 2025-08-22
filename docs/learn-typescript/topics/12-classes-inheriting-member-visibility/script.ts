@@ -83,11 +83,6 @@ Protected - Accessible within the class and its subclasses
 
 Project
 */
-enum Role {
-  Admin = "admin",
-  Member = "member",
-}
-
 enum BookStatus {
   Available = "Available",
   Borrowed = "Borrowed",
@@ -128,10 +123,6 @@ class Admin extends User {
 
   addBook(library: Library, title: string) {
     library.addBook(title);
-  }
-
-  removeBook(library: Library, title: string) {
-    library.removeBook(title);
   }
 }
 
@@ -215,7 +206,6 @@ class Library {
   }
 }
 
-// --- LocalStorage Helpers ---
 function saveLibraryToStorage() {
   localStorage.setItem("libraryBooks", JSON.stringify(library.showBooks()));
 }
@@ -240,7 +230,6 @@ function loadMembersFromStorage() {
   }
 }
 
-// --- Instances & DOM ---
 const library = new Library();
 const members: { [key: string]: Member } = {};
 
@@ -270,7 +259,6 @@ function updateMemberBooks() {
     .join("");
 }
 
-// --- Event Listeners ---
 (document.getElementById("add-book-btn") as HTMLButtonElement).addEventListener(
   "click",
   () => {
