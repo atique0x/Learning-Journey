@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@types/node": "^24.3.0"
+  },
+  "dependencies": {
+    "fullcalendar": "^6.1.19",
+    "vanilla-calendar-pro": "^3.0.5"
+  }
+}

@@ -1,0 +1,15 @@
+import { calenderRender } from "./calender-booking/calender.js";
+import { login } from "./register-login-logout/login.auth.js";
+import { logout } from "./register-login-logout/logout.js";
+import { setUser } from "./register-login-logout/register.js";
+import { updateUI } from "./ui-render/ui-update.js";
+
+console.log("Set User");
+setUser();
+console.log("Set User");
+login();
+console.log("Set User");
+updateUI();
+calenderRender();
+console.log("Set User");
+logout();
